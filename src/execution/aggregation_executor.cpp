@@ -10,10 +10,10 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include "execution/executors/aggregation_executor.h"
+
 #include <memory>
 #include <vector>
-
-#include "execution/executors/aggregation_executor.h"
 
 namespace bustub {
 
@@ -36,9 +36,13 @@ void AggregationExecutor::Init() {}
  * @param[out] rid The next tuple RID produced by the aggregation
  * @return `true` if a tuple was produced, `false` if there are no more tuples
  */
-auto AggregationExecutor::Next(Tuple *tuple, RID *rid) -> bool { return false; }
+auto AggregationExecutor::Next(Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 /** Do not use or remove this function, otherwise you will get zero points. */
-auto AggregationExecutor::GetChildExecutor() const -> const AbstractExecutor * { return child_executor_.get(); }
+auto AggregationExecutor::GetChildExecutor() const -> const AbstractExecutor * {
+    return child_executor_.get();
+}
 
 }  // namespace bustub

@@ -11,9 +11,11 @@
 //===----------------------------------------------------------------------===//
 
 #include "execution/executors/external_merge_sort_executor.h"
+
 #include <iostream>
 #include <optional>
 #include <vector>
+
 #include "common/config.h"
 #include "execution/plans/sort_plan.h"
 
@@ -27,7 +29,7 @@ ExternalMergeSortExecutor<K>::ExternalMergeSortExecutor(ExecutorContext *exec_ct
 /** Initialize the external merge sort */
 template <size_t K>
 void ExternalMergeSortExecutor<K>::Init() {
-  throw NotImplementedException("ExternalMergeSortExecutor is not implemented");
+    throw NotImplementedException("ExternalMergeSortExecutor is not implemented");
 }
 
 /**
@@ -38,7 +40,7 @@ void ExternalMergeSortExecutor<K>::Init() {
  */
 template <size_t K>
 auto ExternalMergeSortExecutor<K>::Next(Tuple *tuple, RID *rid) -> bool {
-  return false;
+    return false;
 }
 
 template class ExternalMergeSortExecutor<2>;

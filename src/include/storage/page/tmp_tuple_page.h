@@ -31,18 +31,18 @@ namespace bustub {
  * We choose this format because DeserializeExpression expects to read Size followed by Data.
  */
 class TmpTuplePage : public Page {
- public:
-  void Init(page_id_t page_id, uint32_t page_size) {
-    memcpy(GetData(), &page_id, sizeof(page_id_t));
-    memcpy(GetData() + sizeof(page_id_t), &page_size, sizeof(uint32_t));
-  }
+public:
+    void Init(page_id_t page_id, uint32_t page_size) {
+        memcpy(GetData(), &page_id, sizeof(page_id_t));
+        memcpy(GetData() + sizeof(page_id_t), &page_size, sizeof(uint32_t));
+    }
 
-  auto GetTablePageId() -> page_id_t { return INVALID_PAGE_ID; }
+    auto GetTablePageId() -> page_id_t { return INVALID_PAGE_ID; }
 
-  auto Insert(const Tuple &tuple, TmpTuple *out) -> bool { return false; }
+    auto Insert(const Tuple &tuple, TmpTuple *out) -> bool { return false; }
 
- private:
-  static_assert(sizeof(page_id_t) == 4);
+private:
+    static_assert(sizeof(page_id_t) == 4);
 };
 
 }  // namespace bustub

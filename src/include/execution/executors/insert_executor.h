@@ -27,20 +27,20 @@ namespace bustub {
  * Inserted values are always pulled from a child executor.
  */
 class InsertExecutor : public AbstractExecutor {
- public:
-  InsertExecutor(ExecutorContext *exec_ctx, const InsertPlanNode *plan,
-                 std::unique_ptr<AbstractExecutor> &&child_executor);
+public:
+    InsertExecutor(ExecutorContext *exec_ctx, const InsertPlanNode *plan,
+                   std::unique_ptr<AbstractExecutor> &&child_executor);
 
-  void Init() override;
+    void Init() override;
 
-  auto Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool override;
+    auto Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool override;
 
-  /** @return The output schema for the insert */
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); };
+    /** @return The output schema for the insert */
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); };
 
- private:
-  /** The insert plan node to be executed*/
-  const InsertPlanNode *plan_;
+private:
+    /** The insert plan node to be executed*/
+    const InsertPlanNode *plan_;
 };
 
 }  // namespace bustub

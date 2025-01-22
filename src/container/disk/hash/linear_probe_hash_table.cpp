@@ -10,6 +10,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include "container/disk/hash/linear_probe_hash_table.h"
+
 #include <iostream>
 #include <string>
 #include <utility>
@@ -18,7 +20,6 @@
 #include "common/exception.h"
 #include "common/logger.h"
 #include "common/rid.h"
-#include "container/disk/hash/linear_probe_hash_table.h"
 
 namespace bustub {
 
@@ -49,8 +50,9 @@ HASH_TABLE_TYPE::LinearProbeHashTable(const std::string &name, BufferPoolManager
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_TYPE::GetValue(Transaction *transaction, const KeyType &key, std::vector<ValueType> *result) -> bool {
-  return false;
+    return false;
 }
+
 /*****************************************************************************
  * INSERTION
  *****************************************************************************/
@@ -64,7 +66,7 @@ auto HASH_TABLE_TYPE::GetValue(Transaction *transaction, const KeyType &key, std
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_TYPE::Insert(Transaction *transaction, const KeyType &key, const ValueType &value) -> bool {
-  return false;
+    return false;
 }
 
 /*****************************************************************************
@@ -80,7 +82,7 @@ auto HASH_TABLE_TYPE::Insert(Transaction *transaction, const KeyType &key, const
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_TYPE::Remove(Transaction *transaction, const KeyType &key, const ValueType &value) -> bool {
-  return false;
+    return false;
 }
 
 /*****************************************************************************
@@ -104,7 +106,7 @@ void HASH_TABLE_TYPE::Resize(size_t initial_size) {}
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_TYPE::GetSize() -> size_t {
-  return 0;
+    return 0;
 }
 
 template class LinearProbeHashTable<int, int, IntComparator>;

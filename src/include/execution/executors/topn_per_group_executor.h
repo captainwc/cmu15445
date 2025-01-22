@@ -28,19 +28,19 @@ namespace bustub {
  * The TopNPerGroupExecutor executor executes a topn.
  */
 class TopNPerGroupExecutor : public AbstractExecutor {
- public:
-  TopNPerGroupExecutor(ExecutorContext *exec_ctx, const TopNPerGroupPlanNode *plan,
-                       std::unique_ptr<AbstractExecutor> &&child_executor);
+public:
+    TopNPerGroupExecutor(ExecutorContext *exec_ctx, const TopNPerGroupPlanNode *plan,
+                         std::unique_ptr<AbstractExecutor> &&child_executor);
 
-  void Init() override;
-  auto Next(Tuple *tuple, RID *rid) -> bool override;
+    void Init() override;
+    auto Next(Tuple *tuple, RID *rid) -> bool override;
 
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
 
- private:
-  /** The TopNPerGroup plan node to be executed */
-  [[maybe_unused]] const TopNPerGroupPlanNode *plan_;
-  /** The child executor from which tuples are obtained */
-  std::unique_ptr<AbstractExecutor> child_executor_;
+private:
+    /** The TopNPerGroup plan node to be executed */
+    [[maybe_unused]] const TopNPerGroupPlanNode *plan_;
+    /** The child executor from which tuples are obtained */
+    std::unique_ptr<AbstractExecutor> child_executor_;
 };
 }  // namespace bustub

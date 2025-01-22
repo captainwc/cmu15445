@@ -11,6 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "execution/executors/filter_executor.h"
+
 #include "common/exception.h"
 #include "type/value_factory.h"
 
@@ -28,8 +29,8 @@ FilterExecutor::FilterExecutor(ExecutorContext *exec_ctx, const FilterPlanNode *
 
 /** Initialize the filter */
 void FilterExecutor::Init() {
-  // Initialize the child executor
-  child_executor_->Init();
+    // Initialize the child executor
+    child_executor_->Init();
 }
 
 /**
@@ -39,21 +40,21 @@ void FilterExecutor::Init() {
  * @return `true` if a tuple was produced, `false` if there are no more tuples
  */
 auto FilterExecutor::Next(Tuple *tuple, RID *rid) -> bool {
-  auto filter_expr = plan_->GetPredicate();
+    auto filter_expr = plan_->GetPredicate();
 
-  while (true) {
-    // Get the next tuple
-    const auto status = child_executor_->Next(tuple, rid);
+    while (true) {
+        // Get the next tuple
+        const auto status = child_executor_->Next(tuple, rid);
 
-    if (!status) {
-      return false;
+        if (!status) {
+            return false;
+        }
+
+        auto value = filter_expr->Evaluate(tuple, child_executor_->GetOutputSchema());
+        if (!value.IsNull() && value.GetAs<bool>()) {
+            return true;
+        }
     }
-
-    auto value = filter_expr->Evaluate(tuple, child_executor_->GetOutputSchema());
-    if (!value.IsNull() && value.GetAs<bool>()) {
-      return true;
-    }
-  }
 }
 
 }  // namespace bustub

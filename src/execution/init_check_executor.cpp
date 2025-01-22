@@ -11,6 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "execution/executors/init_check_executor.h"
+
 #include "execution/plans/abstract_plan.h"
 
 namespace bustub {
@@ -27,12 +28,12 @@ InitCheckExecutor::InitCheckExecutor(ExecutorContext *exec_ctx, AbstractPlanNode
 
 /** Initialize the InitCheck */
 void InitCheckExecutor::Init() {
-  if (!child_executor_) {
-    return;
-  }
-  n_init_++;
-  // Initialize the child executor
-  child_executor_->Init();
+    if (!child_executor_) {
+        return;
+    }
+    n_init_++;
+    // Initialize the child executor
+    child_executor_->Init();
 }
 
 /**
@@ -42,12 +43,12 @@ void InitCheckExecutor::Init() {
  * @return `true` if a tuple was produced, `false` if there are no more tuples
  */
 auto InitCheckExecutor::Next(Tuple *tuple, RID *rid) -> bool {
-  // Emit the next tuple
-  auto result = child_executor_->Next(tuple, rid);
-  if (result) {
-    n_next_++;
-  }
-  return result;
+    // Emit the next tuple
+    auto result = child_executor_->Next(tuple, rid);
+    if (result) {
+        n_next_++;
+    }
+    return result;
 }
 
 }  // namespace bustub

@@ -13,6 +13,7 @@
 #pragma once
 
 #include <fmt/format.h>
+
 #include <atomic>
 #include <bitset>
 #include <cstddef>
@@ -55,203 +56,192 @@ using index_oid_t = uint32_t;
 
 /** Represents a link to a previous version of this tuple */
 struct UndoLink {
-  /* Previous version can be found in which txn */
-  txn_id_t prev_txn_{INVALID_TXN_ID};
-  /* The log index of the previous version in `prev_txn_` */
-  int prev_log_idx_{0};
+    /* Previous version can be found in which txn */
+    txn_id_t prev_txn_{INVALID_TXN_ID};
+    /* The log index of the previous version in `prev_txn_` */
+    int prev_log_idx_{0};
 
-  friend auto operator==(const UndoLink &a, const UndoLink &b) {
-    return a.prev_txn_ == b.prev_txn_ && a.prev_log_idx_ == b.prev_log_idx_;
-  }
+    friend auto operator==(const UndoLink &a, const UndoLink &b) {
+        return a.prev_txn_ == b.prev_txn_ && a.prev_log_idx_ == b.prev_log_idx_;
+    }
 
-  friend auto operator!=(const UndoLink &a, const UndoLink &b) { return !(a == b); }
+    friend auto operator!=(const UndoLink &a, const UndoLink &b) { return !(a == b); }
 
-  /* Checks if the undo link points to something. */
-  auto IsValid() const -> bool { return prev_txn_ != INVALID_TXN_ID; }
+    /* Checks if the undo link points to something. */
+    auto IsValid() const -> bool { return prev_txn_ != INVALID_TXN_ID; }
 };
 
 struct UndoLog {
-  /* Whether this log is a deletion marker */
-  bool is_deleted_;
-  /* The fields modified by this undo log */
-  std::vector<bool> modified_fields_;
-  /* The modified fields */
-  Tuple tuple_;
-  /* Timestamp of this undo log */
-  timestamp_t ts_{INVALID_TS};
-  /* Undo log prev version */
-  UndoLink prev_version_{};
+    /* Whether this log is a deletion marker */
+    bool is_deleted_;
+    /* The fields modified by this undo log */
+    std::vector<bool> modified_fields_;
+    /* The modified fields */
+    Tuple tuple_;
+    /* Timestamp of this undo log */
+    timestamp_t ts_{INVALID_TS};
+    /* Undo log prev version */
+    UndoLink prev_version_{};
 };
 
 /**
  * Transaction tracks information related to a transaction.
  */
 class Transaction {
- public:
-  explicit Transaction(txn_id_t txn_id, IsolationLevel isolation_level = IsolationLevel::SNAPSHOT_ISOLATION)
-      : isolation_level_(isolation_level), thread_id_(std::this_thread::get_id()), txn_id_(txn_id) {}
+public:
+    explicit Transaction(txn_id_t txn_id, IsolationLevel isolation_level = IsolationLevel::SNAPSHOT_ISOLATION)
+        : isolation_level_(isolation_level), thread_id_(std::this_thread::get_id()), txn_id_(txn_id) {}
 
-  ~Transaction() = default;
+    ~Transaction() = default;
 
-  DISALLOW_COPY(Transaction);
+    DISALLOW_COPY(Transaction);
 
-  /** @return the id of the thread running the transaction */
-  inline auto GetThreadId() const -> std::thread::id { return thread_id_; }
+    /** @return the id of the thread running the transaction */
+    inline auto GetThreadId() const -> std::thread::id { return thread_id_; }
 
-  /** @return the id of this transaction */
-  inline auto GetTransactionId() const -> txn_id_t { return txn_id_; }
+    /** @return the id of this transaction */
+    inline auto GetTransactionId() const -> txn_id_t { return txn_id_; }
 
-  /** @return the id of this transaction, stripping the highest bit. NEVER use/store this value unless for debugging. */
-  inline auto GetTransactionIdHumanReadable() const -> txn_id_t { return txn_id_ ^ TXN_START_ID; }
+    /** @return the id of this transaction, stripping the highest bit. NEVER use/store this value unless for debugging.
+     */
+    inline auto GetTransactionIdHumanReadable() const -> txn_id_t { return txn_id_ ^ TXN_START_ID; }
 
-  /** @return the temporary timestamp of this transaction */
-  inline auto GetTransactionTempTs() const -> timestamp_t { return txn_id_; }
+    /** @return the temporary timestamp of this transaction */
+    inline auto GetTransactionTempTs() const -> timestamp_t { return txn_id_; }
 
-  /** @return the isolation level of this transaction */
-  inline auto GetIsolationLevel() const -> IsolationLevel { return isolation_level_; }
+    /** @return the isolation level of this transaction */
+    inline auto GetIsolationLevel() const -> IsolationLevel { return isolation_level_; }
 
-  /** @return the transaction state */
-  inline auto GetTransactionState() const -> TransactionState { return state_; }
+    /** @return the transaction state */
+    inline auto GetTransactionState() const -> TransactionState { return state_; }
 
-  /** @return the read ts */
-  inline auto GetReadTs() const -> timestamp_t { return read_ts_; }
+    /** @return the read ts */
+    inline auto GetReadTs() const -> timestamp_t { return read_ts_; }
 
-  /** @return the commit ts */
-  inline auto GetCommitTs() const -> timestamp_t { return commit_ts_; }
+    /** @return the commit ts */
+    inline auto GetCommitTs() const -> timestamp_t { return commit_ts_; }
 
-  /** Modify an existing undo log. */
-  inline auto ModifyUndoLog(int log_idx, UndoLog new_log) {
-    std::scoped_lock<std::mutex> lck(latch_);
-    undo_logs_[log_idx] = std::move(new_log);
-  }
+    /** Modify an existing undo log. */
+    inline auto ModifyUndoLog(int log_idx, UndoLog new_log) {
+        std::scoped_lock<std::mutex> lck(latch_);
+        undo_logs_[log_idx] = std::move(new_log);
+    }
 
-  /** @return the index of the undo log in this transaction */
-  inline auto AppendUndoLog(UndoLog log) -> UndoLink {
-    std::scoped_lock<std::mutex> lck(latch_);
-    undo_logs_.emplace_back(std::move(log));
-    return {txn_id_, static_cast<int>(undo_logs_.size() - 1)};
-  }
+    /** @return the index of the undo log in this transaction */
+    inline auto AppendUndoLog(UndoLog log) -> UndoLink {
+        std::scoped_lock<std::mutex> lck(latch_);
+        undo_logs_.emplace_back(std::move(log));
+        return {txn_id_, static_cast<int>(undo_logs_.size() - 1)};
+    }
 
-  inline auto AppendWriteSet(table_oid_t t, RID rid) {
-    std::scoped_lock<std::mutex> lck(latch_);
-    write_set_[t].insert(rid);
-  }
+    inline auto AppendWriteSet(table_oid_t t, RID rid) {
+        std::scoped_lock<std::mutex> lck(latch_);
+        write_set_[t].insert(rid);
+    }
 
-  inline auto GetWriteSets() -> const std::unordered_map<table_oid_t, std::unordered_set<RID>> & { return write_set_; }
+    inline auto GetWriteSets() -> const std::unordered_map<table_oid_t, std::unordered_set<RID>> & {
+        return write_set_;
+    }
 
-  inline auto AppendScanPredicate(table_oid_t t, const AbstractExpressionRef &predicate) {
-    std::scoped_lock<std::mutex> lck(latch_);
-    scan_predicates_[t].emplace_back(predicate);
-  }
+    inline auto AppendScanPredicate(table_oid_t t, const AbstractExpressionRef &predicate) {
+        std::scoped_lock<std::mutex> lck(latch_);
+        scan_predicates_[t].emplace_back(predicate);
+    }
 
-  inline auto GetScanPredicates() -> const std::unordered_map<table_oid_t, std::vector<AbstractExpressionRef>> & {
-    return scan_predicates_;
-  }
+    inline auto GetScanPredicates() -> const std::unordered_map<table_oid_t, std::vector<AbstractExpressionRef>> & {
+        return scan_predicates_;
+    }
 
-  inline auto GetUndoLog(size_t log_id) -> UndoLog {
-    std::scoped_lock<std::mutex> lck(latch_);
-    return undo_logs_[log_id];
-  }
+    inline auto GetUndoLog(size_t log_id) -> UndoLog {
+        std::scoped_lock<std::mutex> lck(latch_);
+        return undo_logs_[log_id];
+    }
 
-  inline auto GetUndoLogNum() -> size_t {
-    std::scoped_lock<std::mutex> lck(latch_);
-    return undo_logs_.size();
-  }
+    inline auto GetUndoLogNum() -> size_t {
+        std::scoped_lock<std::mutex> lck(latch_);
+        return undo_logs_.size();
+    }
 
-  /** Use this function in leaderboard benchmarks for online garbage collection. For stop-the-world GC, simply remove
-   * the txn from the txn_map. */
-  inline auto ClearUndoLog() -> size_t {
-    std::scoped_lock<std::mutex> lck(latch_);
-    return undo_logs_.size();
-  }
+    /** Use this function in leaderboard benchmarks for online garbage collection. For stop-the-world GC, simply remove
+     * the txn from the txn_map. */
+    inline auto ClearUndoLog() -> size_t {
+        std::scoped_lock<std::mutex> lck(latch_);
+        return undo_logs_.size();
+    }
 
-  void SetTainted();
+    void SetTainted();
 
- private:
-  friend class TransactionManager;
+private:
+    friend class TransactionManager;
 
-  // The below fields should be ONLY changed by txn manager (with the txn manager lock held).
+    // The below fields should be ONLY changed by txn manager (with the txn manager lock held).
 
-  /** The state of this transaction. */
-  std::atomic<TransactionState> state_{TransactionState::RUNNING};
+    /** The state of this transaction. */
+    std::atomic<TransactionState> state_{TransactionState::RUNNING};
 
-  /** The read ts */
-  std::atomic<timestamp_t> read_ts_{0};
+    /** The read ts */
+    std::atomic<timestamp_t> read_ts_{0};
 
-  /** The commit ts */
-  std::atomic<timestamp_t> commit_ts_{INVALID_TS};
+    /** The commit ts */
+    std::atomic<timestamp_t> commit_ts_{INVALID_TS};
 
-  /** The latch for this transaction for accessing txn-level undo logs, protecting all fields below. */
-  std::mutex latch_;
+    /** The latch for this transaction for accessing txn-level undo logs, protecting all fields below. */
+    std::mutex latch_;
 
-  /**
-   * @brief Store undo logs. Other undo logs / table heap will store (txn_id, index) pairs, and therefore
-   * you should only append to this vector or update things in-place without removing anything.
-   */
-  std::vector<UndoLog> undo_logs_;
+    /**
+     * @brief Store undo logs. Other undo logs / table heap will store (txn_id, index) pairs, and therefore
+     * you should only append to this vector or update things in-place without removing anything.
+     */
+    std::vector<UndoLog> undo_logs_;
 
-  /** stores the RID of write tuples */
-  std::unordered_map<table_oid_t, std::unordered_set<RID>> write_set_;
-  /** store all scan predicates */
-  std::unordered_map<table_oid_t, std::vector<AbstractExpressionRef>> scan_predicates_;
+    /** stores the RID of write tuples */
+    std::unordered_map<table_oid_t, std::unordered_set<RID>> write_set_;
+    /** store all scan predicates */
+    std::unordered_map<table_oid_t, std::vector<AbstractExpressionRef>> scan_predicates_;
 
-  // The below fields are set when a txn is created and will NEVER be changed.
+    // The below fields are set when a txn is created and will NEVER be changed.
 
-  /** The isolation level of the transaction. */
-  const IsolationLevel isolation_level_;
+    /** The isolation level of the transaction. */
+    const IsolationLevel isolation_level_;
 
-  /** The thread ID which the txn starts from.  */
-  const std::thread::id thread_id_;
+    /** The thread ID which the txn starts from.  */
+    const std::thread::id thread_id_;
 
-  /** The ID of this transaction. */
-  const txn_id_t txn_id_;
+    /** The ID of this transaction. */
+    const txn_id_t txn_id_;
 };
 
 }  // namespace bustub
 
 template <>
 struct fmt::formatter<bustub::IsolationLevel> : formatter<std::string_view> {
-  // parse is inherited from formatter<string_view>.
-  template <typename FormatContext>
-  auto format(bustub::IsolationLevel x, FormatContext &ctx) const {
-    using bustub::IsolationLevel;
-    string_view name = "unknown";
-    switch (x) {
-      case IsolationLevel::READ_UNCOMMITTED:
-        name = "READ_UNCOMMITTED";
-        break;
-      case IsolationLevel::SNAPSHOT_ISOLATION:
-        name = "SNAPSHOT_ISOLATION";
-        break;
-      case IsolationLevel::SERIALIZABLE:
-        name = "SERIALIZABLE";
-        break;
+    // parse is inherited from formatter<string_view>.
+    template <typename FormatContext>
+    auto format(bustub::IsolationLevel x, FormatContext &ctx) const {
+        using bustub::IsolationLevel;
+        string_view name = "unknown";
+        switch (x) {
+            case IsolationLevel::READ_UNCOMMITTED: name = "READ_UNCOMMITTED"; break;
+            case IsolationLevel::SNAPSHOT_ISOLATION: name = "SNAPSHOT_ISOLATION"; break;
+            case IsolationLevel::SERIALIZABLE: name = "SERIALIZABLE"; break;
+        }
+        return formatter<string_view>::format(name, ctx);
     }
-    return formatter<string_view>::format(name, ctx);
-  }
 };
 
 template <>
 struct fmt::formatter<bustub::TransactionState> : formatter<std::string_view> {
-  // parse is inherited from formatter<string_view>.
-  template <typename FormatContext>
-  auto format(bustub::TransactionState x, FormatContext &ctx) const {
-    using bustub::TransactionState;
-    string_view name = "unknown";
-    switch (x) {
-      case TransactionState::RUNNING:
-        name = "RUNNING";
-        break;
-      case TransactionState::ABORTED:
-        name = "ABORTED";
-        break;
-      case TransactionState::COMMITTED:
-        name = "COMMITTED";
-        break;
-      case TransactionState::TAINTED:
-        name = "TAINTED";
-        break;
+    // parse is inherited from formatter<string_view>.
+    template <typename FormatContext>
+    auto format(bustub::TransactionState x, FormatContext &ctx) const {
+        using bustub::TransactionState;
+        string_view name = "unknown";
+        switch (x) {
+            case TransactionState::RUNNING: name = "RUNNING"; break;
+            case TransactionState::ABORTED: name = "ABORTED"; break;
+            case TransactionState::COMMITTED: name = "COMMITTED"; break;
+            case TransactionState::TAINTED: name = "TAINTED"; break;
+        }
+        return formatter<string_view>::format(name, ctx);
     }
-    return formatter<string_view>::format(name, ctx);
-  }
 };

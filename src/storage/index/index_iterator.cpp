@@ -13,9 +13,9 @@
 /**
  * index_iterator.cpp
  */
-#include <cassert>
-
 #include "storage/index/index_iterator.h"
+
+#include <cassert>
 
 namespace bustub {
 
@@ -30,15 +30,19 @@ INDEX_TEMPLATE_ARGUMENTS
 INDEXITERATOR_TYPE::~IndexIterator() = default;  // NOLINT
 
 INDEX_TEMPLATE_ARGUMENTS
-auto INDEXITERATOR_TYPE::IsEnd() -> bool { throw std::runtime_error("unimplemented"); }
-
-INDEX_TEMPLATE_ARGUMENTS
-auto INDEXITERATOR_TYPE::operator*() -> std::pair<const KeyType &, const ValueType &> {
-  throw std::runtime_error("unimplemented");
+auto INDEXITERATOR_TYPE::IsEnd() -> bool {
+    throw std::runtime_error("unimplemented");
 }
 
 INDEX_TEMPLATE_ARGUMENTS
-auto INDEXITERATOR_TYPE::operator++() -> INDEXITERATOR_TYPE & { throw std::runtime_error("unimplemented"); }
+auto INDEXITERATOR_TYPE::operator*() -> std::pair<const KeyType &, const ValueType &> {
+    throw std::runtime_error("unimplemented");
+}
+
+INDEX_TEMPLATE_ARGUMENTS
+auto INDEXITERATOR_TYPE::operator++() -> INDEXITERATOR_TYPE & {
+    throw std::runtime_error("unimplemented");
+}
 
 template class IndexIterator<GenericKey<4>, RID, GenericComparator<4>>;
 

@@ -11,6 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "storage/page/hash_table_block_page.h"
+
 #include "storage/index/generic_key.h"
 
 namespace bustub {
@@ -23,7 +24,7 @@ namespace bustub {
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_BLOCK_TYPE::KeyAt(slot_offset_t bucket_ind) const -> KeyType {
-  return {};
+    return {};
 }
 
 /**
@@ -34,7 +35,7 @@ auto HASH_TABLE_BLOCK_TYPE::KeyAt(slot_offset_t bucket_ind) const -> KeyType {
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_BLOCK_TYPE::ValueAt(slot_offset_t bucket_ind) const -> ValueType {
-  return {};
+    return {};
 }
 
 /**
@@ -52,7 +53,7 @@ auto HASH_TABLE_BLOCK_TYPE::ValueAt(slot_offset_t bucket_ind) const -> ValueType
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_BLOCK_TYPE::Insert(slot_offset_t bucket_ind, const KeyType &key, const ValueType &value) -> bool {
-  return false;
+    return false;
 }
 
 /**
@@ -71,7 +72,7 @@ void HASH_TABLE_BLOCK_TYPE::Remove(slot_offset_t bucket_ind) {}
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_BLOCK_TYPE::IsOccupied(slot_offset_t bucket_ind) const -> bool {
-  return false;
+    return false;
 }
 
 /**
@@ -82,7 +83,7 @@ auto HASH_TABLE_BLOCK_TYPE::IsOccupied(slot_offset_t bucket_ind) const -> bool {
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_BLOCK_TYPE::IsReadable(slot_offset_t bucket_ind) const -> bool {
-  return false;
+    return false;
 }
 
 // DO NOT REMOVE ANYTHING BELOW THIS LINE

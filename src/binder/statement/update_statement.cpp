@@ -10,9 +10,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include "fmt/ranges.h"
-
 #include "binder/statement/update_statement.h"
+
+#include "fmt/ranges.h"
 
 namespace bustub {
 
@@ -25,8 +25,8 @@ UpdateStatement::UpdateStatement(
       target_expr_(std::move(target_expr)) {}
 
 auto UpdateStatement::ToString() const -> std::string {
-  return fmt::format("BoundUpdate {{\n  table={},\n  filter_expr={},\n  target_expr={},\n}}", *table_, *filter_expr_,
-                     target_expr_);
+    return fmt::format("BoundUpdate {{\n  table={},\n  filter_expr={},\n  target_expr={},\n}}", *table_, *filter_expr_,
+                       target_expr_);
 }
 
 }  // namespace bustub

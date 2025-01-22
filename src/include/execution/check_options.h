@@ -32,8 +32,8 @@
 namespace bustub {
 
 enum class CheckOption : uint8_t {
-  ENABLE_NLJ_CHECK = 0,
-  ENABLE_TOPN_CHECK = 1,
+    ENABLE_NLJ_CHECK  = 0,
+    ENABLE_TOPN_CHECK = 1,
 };
 
 /**
@@ -41,8 +41,8 @@ enum class CheckOption : uint8_t {
  * executor logic.
  */
 class CheckOptions {
- public:
-  std::unordered_set<CheckOption> check_options_set_;
+public:
+    std::unordered_set<CheckOption> check_options_set_;
 };
 
 };  // namespace bustub

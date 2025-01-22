@@ -12,6 +12,7 @@
 
 #pragma once
 #include <string>
+
 #include "type/value.h"
 
 namespace bustub {
@@ -21,37 +22,37 @@ namespace bustub {
  * means we store actual data along with its size rather than a pointer
  */
 class VarlenType : public Type {
- public:
-  explicit VarlenType(TypeId type);
-  ~VarlenType() override;
+public:
+    explicit VarlenType(TypeId type);
+    ~VarlenType() override;
 
-  auto GetData(const Value &val) const -> const char * override;
+    auto GetData(const Value &val) const -> const char * override;
 
-  auto GetStorageSize(const Value &val) const -> uint32_t override;
+    auto GetStorageSize(const Value &val) const -> uint32_t override;
 
-  // Comparison functions
-  auto CompareEquals(const Value &left, const Value &right) const -> CmpBool override;
-  auto CompareNotEquals(const Value &left, const Value &right) const -> CmpBool override;
-  auto CompareLessThan(const Value &left, const Value &right) const -> CmpBool override;
-  auto CompareLessThanEquals(const Value &left, const Value &right) const -> CmpBool override;
-  auto CompareGreaterThan(const Value &left, const Value &right) const -> CmpBool override;
-  auto CompareGreaterThanEquals(const Value &left, const Value &right) const -> CmpBool override;
+    // Comparison functions
+    auto CompareEquals(const Value &left, const Value &right) const -> CmpBool override;
+    auto CompareNotEquals(const Value &left, const Value &right) const -> CmpBool override;
+    auto CompareLessThan(const Value &left, const Value &right) const -> CmpBool override;
+    auto CompareLessThanEquals(const Value &left, const Value &right) const -> CmpBool override;
+    auto CompareGreaterThan(const Value &left, const Value &right) const -> CmpBool override;
+    auto CompareGreaterThanEquals(const Value &left, const Value &right) const -> CmpBool override;
 
-  // Other mathematical functions
-  auto Min(const Value &left, const Value &right) const -> Value override;
-  auto Max(const Value &left, const Value &right) const -> Value override;
+    // Other mathematical functions
+    auto Min(const Value &left, const Value &right) const -> Value override;
+    auto Max(const Value &left, const Value &right) const -> Value override;
 
-  auto CastAs(const Value &value, TypeId type_id) const -> Value override;
+    auto CastAs(const Value &value, TypeId type_id) const -> Value override;
 
-  // Decimal types are always inlined
-  auto IsInlined(const Value & /*val*/) const -> bool override { return false; }
+    // Decimal types are always inlined
+    auto IsInlined(const Value & /*val*/) const -> bool override { return false; }
 
-  auto ToString(const Value &val) const -> std::string override;
+    auto ToString(const Value &val) const -> std::string override;
 
-  void SerializeTo(const Value &val, char *storage) const override;
+    void SerializeTo(const Value &val, char *storage) const override;
 
-  auto DeserializeFrom(const char *storage) const -> Value override;
+    auto DeserializeFrom(const char *storage) const -> Value override;
 
-  auto Copy(const Value &val) const -> Value override;
+    auto Copy(const Value &val) const -> Value override;
 };
 }  // namespace bustub

@@ -28,34 +28,36 @@ namespace bustub {
  * NOTE: To simplify the assignment, DeletePlanNode has at most one child.
  */
 class DeletePlanNode : public AbstractPlanNode {
- public:
-  /**
-   * Construct a new DeletePlanNode.
-   * @param child The child plan to obtain tuple from
-   * @param table_oid The identifier of the table from which tuples are deleted
-   */
-  DeletePlanNode(SchemaRef output, AbstractPlanNodeRef child, table_oid_t table_oid)
-      : AbstractPlanNode(std::move(output), {std::move(child)}), table_oid_{table_oid} {}
+public:
+    /**
+     * Construct a new DeletePlanNode.
+     * @param child The child plan to obtain tuple from
+     * @param table_oid The identifier of the table from which tuples are deleted
+     */
+    DeletePlanNode(SchemaRef output, AbstractPlanNodeRef child, table_oid_t table_oid)
+        : AbstractPlanNode(std::move(output), {std::move(child)}), table_oid_{table_oid} {}
 
-  /** @return The type of the plan node */
-  auto GetType() const -> PlanType override { return PlanType::Delete; }
+    /** @return The type of the plan node */
+    auto GetType() const -> PlanType override { return PlanType::Delete; }
 
-  /** @return The identifier of the table from which tuples are deleted*/
-  auto GetTableOid() const -> table_oid_t { return table_oid_; }
+    /** @return The identifier of the table from which tuples are deleted*/
+    auto GetTableOid() const -> table_oid_t { return table_oid_; }
 
-  /** @return The child plan providing tuples to be deleted */
-  auto GetChildPlan() const -> AbstractPlanNodeRef {
-    BUSTUB_ASSERT(GetChildren().size() == 1, "delete should have at most one child plan.");
-    return GetChildAt(0);
-  }
+    /** @return The child plan providing tuples to be deleted */
+    auto GetChildPlan() const -> AbstractPlanNodeRef {
+        BUSTUB_ASSERT(GetChildren().size() == 1, "delete should have at most one child plan.");
+        return GetChildAt(0);
+    }
 
-  BUSTUB_PLAN_NODE_CLONE_WITH_CHILDREN(DeletePlanNode);
+    BUSTUB_PLAN_NODE_CLONE_WITH_CHILDREN(DeletePlanNode);
 
-  /** The identifier of the table from which tuples are deleted */
-  table_oid_t table_oid_;
+    /** The identifier of the table from which tuples are deleted */
+    table_oid_t table_oid_;
 
- protected:
-  auto PlanNodeToString() const -> std::string override { return fmt::format("Delete {{ table_oid={} }}", table_oid_); }
+protected:
+    auto PlanNodeToString() const -> std::string override {
+        return fmt::format("Delete {{ table_oid={} }}", table_oid_);
+    }
 };
 
 }  // namespace bustub

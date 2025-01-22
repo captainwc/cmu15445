@@ -22,25 +22,25 @@ namespace bustub {
 template <typename KeyType, typename KeyValue, typename KeyComparator>
 bool TreeValuesMatch(BPlusTree<KeyType, KeyValue, KeyComparator> &tree, std::vector<int64_t> &inserted,
                      std::vector<int64_t> &deleted) {
-  std::vector<KeyValue> rids;
-  KeyType index_key;
-  for (auto &key : inserted) {
-    rids.clear();
-    index_key.SetFromInteger(key);
-    tree.GetValue(index_key, &rids);
-    if (rids.size() != 1) {
-      return false;
+    std::vector<KeyValue> rids;
+    KeyType               index_key;
+    for (auto &key : inserted) {
+        rids.clear();
+        index_key.SetFromInteger(key);
+        tree.GetValue(index_key, &rids);
+        if (rids.size() != 1) {
+            return false;
+        }
     }
-  }
-  for (auto &key : deleted) {
-    rids.clear();
-    index_key.SetFromInteger(key);
-    tree.GetValue(index_key, &rids);
-    if (!rids.empty()) {
-      return false;
+    for (auto &key : deleted) {
+        rids.clear();
+        index_key.SetFromInteger(key);
+        tree.GetValue(index_key, &rids);
+        if (!rids.empty()) {
+            return false;
+        }
     }
-  }
-  return true;
+    return true;
 }
 
 }  // namespace bustub

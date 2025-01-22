@@ -24,7 +24,9 @@ SortExecutor::SortExecutor(ExecutorContext *exec_ctx, const SortPlanNode *plan,
     : AbstractExecutor(exec_ctx) {}
 
 /** Initialize the sort */
-void SortExecutor::Init() { throw NotImplementedException("SortExecutor is not implemented"); }
+void SortExecutor::Init() {
+    throw NotImplementedException("SortExecutor is not implemented");
+}
 
 /**
  * Yield the next tuple from the sort.
@@ -32,6 +34,8 @@ void SortExecutor::Init() { throw NotImplementedException("SortExecutor is not i
  * @param[out] rid The next tuple RID produced by the sort
  * @return `true` if a tuple was produced, `false` if there are no more tuples
  */
-auto SortExecutor::Next(Tuple *tuple, RID *rid) -> bool { return false; }
+auto SortExecutor::Next(Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 }  // namespace bustub

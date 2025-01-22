@@ -10,8 +10,6 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include "storage/disk/disk_manager.h"
-
 #include <array>
 #include <cassert>
 #include <chrono>  // NOLINT
@@ -31,6 +29,7 @@
 #include "common/exception.h"
 #include "common/logger.h"
 #include "fmt/core.h"
+#include "storage/disk/disk_manager.h"
 
 namespace bustub {
 
@@ -39,17 +38,17 @@ namespace bustub {
  * data structure performance testing.
  */
 class DiskManagerMemory : public DiskManager {
- public:
-  explicit DiskManagerMemory(size_t capacity);
+public:
+    explicit DiskManagerMemory(size_t capacity);
 
-  ~DiskManagerMemory() override { delete[] memory_; }
+    ~DiskManagerMemory() override { delete[] memory_; }
 
-  void WritePage(page_id_t page_id, const char *page_data) override;
+    void WritePage(page_id_t page_id, const char *page_data) override;
 
-  void ReadPage(page_id_t page_id, char *page_data) override;
+    void ReadPage(page_id_t page_id, char *page_data) override;
 
- private:
-  char *memory_;
+private:
+    char *memory_;
 };
 
 /**
@@ -57,36 +56,36 @@ class DiskManagerMemory : public DiskManager {
  * data structure performance testing.
  */
 class DiskManagerUnlimitedMemory : public DiskManager {
- public:
-  DiskManagerUnlimitedMemory();
+public:
+    DiskManagerUnlimitedMemory();
 
-  void WritePage(page_id_t page_id, const char *page_data) override;
+    void WritePage(page_id_t page_id, const char *page_data) override;
 
-  void ReadPage(page_id_t page_id, char *page_data) override;
+    void ReadPage(page_id_t page_id, char *page_data) override;
 
-  void DeletePage(page_id_t page_id) override;
+    void DeletePage(page_id_t page_id) override;
 
-  void ProcessLatency(page_id_t page_id);
+    void ProcessLatency(page_id_t page_id);
 
-  void PostProcessLatency(page_id_t page_id);
+    void PostProcessLatency(page_id_t page_id);
 
-  void EnableLatencySimulator(bool enabled) { latency_simulator_enabled_ = enabled; }
+    void EnableLatencySimulator(bool enabled) { latency_simulator_enabled_ = enabled; }
 
-  auto GetLastReadThreadAndClear() -> std::optional<std::thread::id>;
+    auto GetLastReadThreadAndClear() -> std::optional<std::thread::id>;
 
- private:
-  bool latency_simulator_enabled_{false};
+private:
+    bool latency_simulator_enabled_{false};
 
-  std::mutex latency_processor_mutex_;
-  std::array<page_id_t, 4> recent_access_;
-  uint64_t access_ptr_{0};
+    std::mutex               latency_processor_mutex_;
+    std::array<page_id_t, 4> recent_access_;
+    uint64_t                 access_ptr_{0};
 
-  using Page = std::array<char, BUSTUB_PAGE_SIZE>;
-  using ProtectedPage = std::pair<Page, std::shared_mutex>;
+    using Page          = std::array<char, BUSTUB_PAGE_SIZE>;
+    using ProtectedPage = std::pair<Page, std::shared_mutex>;
 
-  std::mutex mutex_;
-  std::optional<std::thread::id> thread_id_;
-  std::vector<std::shared_ptr<ProtectedPage>> data_;
+    std::mutex                                  mutex_;
+    std::optional<std::thread::id>              thread_id_;
+    std::vector<std::shared_ptr<ProtectedPage>> data_;
 };
 
 }  // namespace bustub

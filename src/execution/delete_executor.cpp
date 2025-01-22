@@ -10,9 +10,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <memory>
-
 #include "execution/executors/delete_executor.h"
+
+#include <memory>
 
 namespace bustub {
 
@@ -27,7 +27,9 @@ DeleteExecutor::DeleteExecutor(ExecutorContext *exec_ctx, const DeletePlanNode *
     : AbstractExecutor(exec_ctx) {}
 
 /** Initialize the delete */
-void DeleteExecutor::Init() { throw NotImplementedException("DeleteExecutor is not implemented"); }
+void DeleteExecutor::Init() {
+    throw NotImplementedException("DeleteExecutor is not implemented");
+}
 
 /**
  * Yield the number of rows deleted from the table.
@@ -38,6 +40,8 @@ void DeleteExecutor::Init() { throw NotImplementedException("DeleteExecutor is n
  * NOTE: DeleteExecutor::Next() does not use the `rid` out-parameter.
  * NOTE: DeleteExecutor::Next() returns true with the number of deleted rows produced only once.
  */
-auto DeleteExecutor::Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool { return false; }
+auto DeleteExecutor::Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 }  // namespace bustub

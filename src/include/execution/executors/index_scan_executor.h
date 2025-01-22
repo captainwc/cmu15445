@@ -27,17 +27,17 @@ namespace bustub {
  */
 
 class IndexScanExecutor : public AbstractExecutor {
- public:
-  IndexScanExecutor(ExecutorContext *exec_ctx, const IndexScanPlanNode *plan);
+public:
+    IndexScanExecutor(ExecutorContext *exec_ctx, const IndexScanPlanNode *plan);
 
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
 
-  void Init() override;
+    void Init() override;
 
-  auto Next(Tuple *tuple, RID *rid) -> bool override;
+    auto Next(Tuple *tuple, RID *rid) -> bool override;
 
- private:
-  /** The index scan plan node to be executed. */
-  const IndexScanPlanNode *plan_;
+private:
+    /** The index scan plan node to be executed. */
+    const IndexScanPlanNode *plan_;
 };
 }  // namespace bustub

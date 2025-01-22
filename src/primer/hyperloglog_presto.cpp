@@ -21,13 +21,13 @@ HyperLogLogPresto<KeyType>::HyperLogLogPresto(int16_t n_leading_bits) : cardinal
 /** @brief Element is added for HLL calculation. */
 template <typename KeyType>
 auto HyperLogLogPresto<KeyType>::AddElem(KeyType val) -> void {
-  /** @TODO(student) Implement this function! */
+    /** @TODO(student) Implement this function! */
 }
 
 /** @brief Function to compute cardinality. */
 template <typename T>
 auto HyperLogLogPresto<T>::ComputeCardinality() -> void {
-  /** @TODO(student) Implement this function! */
+    /** @TODO(student) Implement this function! */
 }
 
 template class HyperLogLogPresto<int64_t>;

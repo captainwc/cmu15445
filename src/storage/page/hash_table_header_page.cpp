@@ -20,12 +20,16 @@ namespace bustub {
  * @param index the index of the block
  * @return the page_id for the block.
  */
-auto HashTableHeaderPage::GetBlockPageId(size_t index) -> page_id_t { return 0; }
+auto HashTableHeaderPage::GetBlockPageId(size_t index) -> page_id_t {
+    return 0;
+}
 
 /**
  * @return the page ID of this page
  */
-auto HashTableHeaderPage::GetPageId() const -> page_id_t { return 0; }
+auto HashTableHeaderPage::GetPageId() const -> page_id_t {
+    return 0;
+}
 
 /**
  * Sets the page ID of this page
@@ -37,7 +41,9 @@ void HashTableHeaderPage::SetPageId(bustub::page_id_t page_id) {}
 /**
  * @return the lsn of this page
  */
-auto HashTableHeaderPage::GetLSN() const -> lsn_t { return 0; }
+auto HashTableHeaderPage::GetLSN() const -> lsn_t {
+    return 0;
+}
 
 /**
  * Sets the LSN of this page
@@ -56,7 +62,9 @@ void HashTableHeaderPage::AddBlockPageId(page_id_t page_id) {}
 /**
  * @return the number of blocks currently stored in the header page
  */
-auto HashTableHeaderPage::NumBlocks() -> size_t { return 0; }
+auto HashTableHeaderPage::NumBlocks() -> size_t {
+    return 0;
+}
 
 /**
  * Sets the size field of the hash table to size
@@ -68,6 +76,8 @@ void HashTableHeaderPage::SetSize(size_t size) {}
 /**
  * @return the number of buckets in the hash table;
  */
-auto HashTableHeaderPage::GetSize() const -> size_t { return 0; }
+auto HashTableHeaderPage::GetSize() const -> size_t {
+    return 0;
+}
 
 }  // namespace bustub

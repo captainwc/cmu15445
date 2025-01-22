@@ -11,6 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "binder/statement/index_statement.h"
+
 #include "binder/bound_expression.h"
 #include "binder/expressions/bound_column_ref.h"
 #include "fmt/format.h"
@@ -30,8 +31,9 @@ IndexStatement::IndexStatement(std::string index_name, std::unique_ptr<BoundBase
       options_(std::move(options)) {}
 
 auto IndexStatement::ToString() const -> std::string {
-  return fmt::format("BoundIndex {{ index_name={}, table={}, cols={}, using={}, col_options=[{}], options=[{}] }}",
-                     index_name_, *table_, cols_, index_type_, fmt::join(col_options_, ","), fmt::join(options_, ","));
+    return fmt::format("BoundIndex {{ index_name={}, table={}, cols={}, using={}, col_options=[{}], options=[{}] }}",
+                       index_name_, *table_, cols_, index_type_, fmt::join(col_options_, ","),
+                       fmt::join(options_, ","));
 }
 
 }  // namespace bustub

@@ -24,7 +24,9 @@ TopNExecutor::TopNExecutor(ExecutorContext *exec_ctx, const TopNPlanNode *plan,
     : AbstractExecutor(exec_ctx) {}
 
 /** Initialize the TopN */
-void TopNExecutor::Init() { throw NotImplementedException("TopNExecutor is not implemented"); }
+void TopNExecutor::Init() {
+    throw NotImplementedException("TopNExecutor is not implemented");
+}
 
 /**
  * Yield the next tuple from the TopN.
@@ -32,8 +34,12 @@ void TopNExecutor::Init() { throw NotImplementedException("TopNExecutor is not i
  * @param[out] rid The next tuple RID produced by the TopN
  * @return `true` if a tuple was produced, `false` if there are no more tuples
  */
-auto TopNExecutor::Next(Tuple *tuple, RID *rid) -> bool { return false; }
+auto TopNExecutor::Next(Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
-auto TopNExecutor::GetNumInHeap() -> size_t { throw NotImplementedException("TopNExecutor is not implemented"); };
+auto TopNExecutor::GetNumInHeap() -> size_t {
+    throw NotImplementedException("TopNExecutor is not implemented");
+};
 
 }  // namespace bustub

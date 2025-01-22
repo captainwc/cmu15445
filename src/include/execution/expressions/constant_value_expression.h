@@ -23,22 +23,22 @@ namespace bustub {
  * ConstantValueExpression represents constants.
  */
 class ConstantValueExpression : public AbstractExpression {
- public:
-  /** Creates a new constant value expression wrapping the given value. */
-  explicit ConstantValueExpression(const Value &val) : AbstractExpression({}, val.GetColumn()), val_(val) {}
+public:
+    /** Creates a new constant value expression wrapping the given value. */
+    explicit ConstantValueExpression(const Value &val) : AbstractExpression({}, val.GetColumn()), val_(val) {}
 
-  auto Evaluate(const Tuple *tuple, const Schema &schema) const -> Value override { return val_; }
+    auto Evaluate(const Tuple *tuple, const Schema &schema) const -> Value override { return val_; }
 
-  auto EvaluateJoin(const Tuple *left_tuple, const Schema &left_schema, const Tuple *right_tuple,
-                    const Schema &right_schema) const -> Value override {
-    return val_;
-  }
+    auto EvaluateJoin(const Tuple *left_tuple, const Schema &left_schema, const Tuple *right_tuple,
+                      const Schema &right_schema) const -> Value override {
+        return val_;
+    }
 
-  /** @return the string representation of the plan node and its children */
-  auto ToString() const -> std::string override { return val_.ToString(); }
+    /** @return the string representation of the plan node and its children */
+    auto ToString() const -> std::string override { return val_.ToString(); }
 
-  BUSTUB_EXPR_CLONE_WITH_CHILDREN(ConstantValueExpression);
+    BUSTUB_EXPR_CLONE_WITH_CHILDREN(ConstantValueExpression);
 
-  Value val_;
+    Value val_;
 };
 }  // namespace bustub

@@ -25,14 +25,16 @@ HashJoinExecutor::HashJoinExecutor(ExecutorContext *exec_ctx, const HashJoinPlan
                                    std::unique_ptr<AbstractExecutor> &&left_child,
                                    std::unique_ptr<AbstractExecutor> &&right_child)
     : AbstractExecutor(exec_ctx) {
-  if (!(plan->GetJoinType() == JoinType::LEFT || plan->GetJoinType() == JoinType::INNER)) {
-    // Note for Fall 2024: You ONLY need to implement left join and inner join.
-    throw bustub::NotImplementedException(fmt::format("join type {} not supported", plan->GetJoinType()));
-  }
+    if (!(plan->GetJoinType() == JoinType::LEFT || plan->GetJoinType() == JoinType::INNER)) {
+        // Note for Fall 2024: You ONLY need to implement left join and inner join.
+        throw bustub::NotImplementedException(fmt::format("join type {} not supported", plan->GetJoinType()));
+    }
 }
 
 /** Initialize the join */
-void HashJoinExecutor::Init() { throw NotImplementedException("HashJoinExecutor is not implemented"); }
+void HashJoinExecutor::Init() {
+    throw NotImplementedException("HashJoinExecutor is not implemented");
+}
 
 /**
  * Yield the next tuple from the join.
@@ -40,6 +42,8 @@ void HashJoinExecutor::Init() { throw NotImplementedException("HashJoinExecutor 
  * @param[out] rid The next tuple RID, not used by hash join.
  * @return `true` if a tuple was produced, `false` if there are no more tuples.
  */
-auto HashJoinExecutor::Next(Tuple *tuple, RID *rid) -> bool { return false; }
+auto HashJoinExecutor::Next(Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 }  // namespace bustub

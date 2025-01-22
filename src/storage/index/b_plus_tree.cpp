@@ -11,6 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "storage/index/b_plus_tree.h"
+
 #include "storage/index/b_plus_tree_debug.h"
 
 namespace bustub {
@@ -24,9 +25,9 @@ BPLUSTREE_TYPE::BPlusTree(std::string name, page_id_t header_page_id, BufferPool
       leaf_max_size_(leaf_max_size),
       internal_max_size_(internal_max_size),
       header_page_id_(header_page_id) {
-  WritePageGuard guard = bpm_->WritePage(header_page_id_);
-  auto root_page = guard.AsMut<BPlusTreeHeaderPage>();
-  root_page->root_page_id_ = INVALID_PAGE_ID;
+    WritePageGuard guard     = bpm_->WritePage(header_page_id_);
+    auto           root_page = guard.AsMut<BPlusTreeHeaderPage>();
+    root_page->root_page_id_ = INVALID_PAGE_ID;
 }
 
 /**
@@ -34,7 +35,9 @@ BPLUSTREE_TYPE::BPlusTree(std::string name, page_id_t header_page_id, BufferPool
  * @return Returns true if this B+ tree has no keys and values.
  */
 INDEX_TEMPLATE_ARGUMENTS
-auto BPLUSTREE_TYPE::IsEmpty() const -> bool { return true; }
+auto BPLUSTREE_TYPE::IsEmpty() const -> bool {
+    return true;
+}
 
 /*****************************************************************************
  * SEARCH
@@ -50,10 +53,10 @@ auto BPLUSTREE_TYPE::IsEmpty() const -> bool { return true; }
  */
 INDEX_TEMPLATE_ARGUMENTS
 auto BPLUSTREE_TYPE::GetValue(const KeyType &key, std::vector<ValueType> *result) -> bool {
-  // Declaration of context instance.
-  Context ctx;
-  (void)ctx;
-  return false;
+    // Declaration of context instance.
+    Context ctx;
+    (void)ctx;
+    return false;
 }
 
 /*****************************************************************************
@@ -72,10 +75,10 @@ auto BPLUSTREE_TYPE::GetValue(const KeyType &key, std::vector<ValueType> *result
  */
 INDEX_TEMPLATE_ARGUMENTS
 auto BPLUSTREE_TYPE::Insert(const KeyType &key, const ValueType &value) -> bool {
-  // Declaration of context instance.
-  Context ctx;
-  (void)ctx;
-  return false;
+    // Declaration of context instance.
+    Context ctx;
+    (void)ctx;
+    return false;
 }
 
 /*****************************************************************************
@@ -92,9 +95,9 @@ auto BPLUSTREE_TYPE::Insert(const KeyType &key, const ValueType &value) -> bool 
  */
 INDEX_TEMPLATE_ARGUMENTS
 void BPLUSTREE_TYPE::Remove(const KeyType &key) {
-  // Declaration of context instance.
-  Context ctx;
-  (void)ctx;
+    // Declaration of context instance.
+    Context ctx;
+    (void)ctx;
 }
 
 /*****************************************************************************
@@ -106,7 +109,9 @@ void BPLUSTREE_TYPE::Remove(const KeyType &key) {
  * @return : index iterator
  */
 INDEX_TEMPLATE_ARGUMENTS
-auto BPLUSTREE_TYPE::Begin() -> INDEXITERATOR_TYPE { return INDEXITERATOR_TYPE(); }
+auto BPLUSTREE_TYPE::Begin() -> INDEXITERATOR_TYPE {
+    return INDEXITERATOR_TYPE();
+}
 
 /**
  * @brief Input parameter is low key, find the leaf page that contains the input key
@@ -114,7 +119,9 @@ auto BPLUSTREE_TYPE::Begin() -> INDEXITERATOR_TYPE { return INDEXITERATOR_TYPE()
  * @return : index iterator
  */
 INDEX_TEMPLATE_ARGUMENTS
-auto BPLUSTREE_TYPE::Begin(const KeyType &key) -> INDEXITERATOR_TYPE { return INDEXITERATOR_TYPE(); }
+auto BPLUSTREE_TYPE::Begin(const KeyType &key) -> INDEXITERATOR_TYPE {
+    return INDEXITERATOR_TYPE();
+}
 
 /**
  * @brief Input parameter is void, construct an index iterator representing the end
@@ -122,13 +129,17 @@ auto BPLUSTREE_TYPE::Begin(const KeyType &key) -> INDEXITERATOR_TYPE { return IN
  * @return : index iterator
  */
 INDEX_TEMPLATE_ARGUMENTS
-auto BPLUSTREE_TYPE::End() -> INDEXITERATOR_TYPE { return INDEXITERATOR_TYPE(); }
+auto BPLUSTREE_TYPE::End() -> INDEXITERATOR_TYPE {
+    return INDEXITERATOR_TYPE();
+}
 
 /**
  * @return Page id of the root of this tree
  */
 INDEX_TEMPLATE_ARGUMENTS
-auto BPLUSTREE_TYPE::GetRootPageId() -> page_id_t { return 0; }
+auto BPLUSTREE_TYPE::GetRootPageId() -> page_id_t {
+    return 0;
+}
 
 template class BPlusTree<GenericKey<4>, RID, GenericComparator<4>>;
 

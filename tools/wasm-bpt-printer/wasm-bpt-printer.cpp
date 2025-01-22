@@ -18,6 +18,7 @@
 #include <memory>
 #include <sstream>
 #include <string>
+
 #include "binder/binder.h"
 #include "buffer/buffer_pool_manager.h"
 #include "common/bustub_instance.h"
@@ -42,91 +43,88 @@ using bustub::RID;
 using bustub::Transaction;
 
 auto UsageMessage() -> std::string {
-  std::string message =
-      "Enter any of the following commands after the prompt > :\n"
-      "\ti <k>  -- Insert <k> (int64_t) as both key and value).\n"
-      "\td <k>  -- Delete key <k> and its associated value.\n"
-      "\t? -- Print this help message.";
-  return message;
+    std::string message = "Enter any of the following commands after the prompt > :\n"
+                          "\ti <k>  -- Insert <k> (int64_t) as both key and value).\n"
+                          "\td <k>  -- Delete key <k> and its associated value.\n"
+                          "\t? -- Print this help message.";
+    return message;
 }
 
-using BPT = BPlusTree<GenericKey<8>, RID, GenericComparator<8>>;
-BPT *tree = nullptr;
-BufferPoolManager *bpm = nullptr;
+using BPT                                  = BPlusTree<GenericKey<8>, RID, GenericComparator<8>>;
+BPT                            *tree       = nullptr;
+BufferPoolManager              *bpm        = nullptr;
 std::unique_ptr<bustub::Schema> key_schema = nullptr;
 
 extern "C" {
 
 auto BusTubInit(int leaf_max_size, int internal_max_size) -> int {
-  // create KeyComparator and index schema
-  std::string create_stmt = "a bigint";
-  try {
-    key_schema = ParseCreateStatement(create_stmt);
-  } catch (Exception &ex) {
-    std::cerr << "Failed to parse create statement: " << ex.what() << std::endl;
-  }
+    // create KeyComparator and index schema
+    std::string create_stmt = "a bigint";
+    try {
+        key_schema = ParseCreateStatement(create_stmt);
+    } catch (Exception &ex) {
+        std::cerr << "Failed to parse create statement: " << ex.what() << std::endl;
+    }
 
-  GenericComparator<8> comparator(key_schema.get());
+    GenericComparator<8> comparator(key_schema.get());
 
-  auto *disk_manager = new DiskManager("test.bustub");
-  bpm = new BufferPoolManager(100, disk_manager);
-  // create header_page
-  auto page_id = bpm->NewPage();
-  // create b+ tree
-  tree = new BPT("foo_pk", page_id, bpm, comparator, leaf_max_size, internal_max_size);
-  return 0;
+    auto *disk_manager = new DiskManager("test.bustub");
+    bpm                = new BufferPoolManager(100, disk_manager);
+    // create header_page
+    auto page_id = bpm->NewPage();
+    // create b+ tree
+    tree = new BPT("foo_pk", page_id, bpm, comparator, leaf_max_size, internal_max_size);
+    return 0;
 }
 
 auto BusTubApplyCommand(const char *input, char *output, uint16_t len) -> int {
-  GenericKey<8> index_key;
-  int64_t key = 0;
-  RID rid;
-  std::string output_string;
-  std::stringstream ss(input);
-  char instruction;
-  ss >> instruction;
-  if (!ss) {
-    return 1;
-  }
-
-  switch (instruction) {
-    case 'd':
-      ss >> key;
-      if (!ss) {
+    GenericKey<8>     index_key;
+    int64_t           key = 0;
+    RID               rid;
+    std::string       output_string;
+    std::stringstream ss(input);
+    char              instruction;
+    ss >> instruction;
+    if (!ss) {
         return 1;
-      }
-      index_key.SetFromInteger(key);
-      tree->Remove(index_key);
-      break;
-    case 'i':
-      ss >> key;
-      if (!ss) {
-        return 1;
-      }
-      rid.Set(static_cast<int32_t>(key >> 32), static_cast<int>(key & 0xFFFFFFFF));
-      index_key.SetFromInteger(key);
-      tree->Insert(index_key, rid);
-      break;
-    case '?':
-      std::cout << UsageMessage();
-      break;
-  }
+    }
 
-  tree->Draw(bpm, "test.out");
-  std::ifstream x("test.out");
-  while (x) {
-    std::string str;
-    std::getline(x, str);
-    output_string += str;
-  }
-  x.close();
-  remove("test.out");
+    switch (instruction) {
+        case 'd':
+            ss >> key;
+            if (!ss) {
+                return 1;
+            }
+            index_key.SetFromInteger(key);
+            tree->Remove(index_key);
+            break;
+        case 'i':
+            ss >> key;
+            if (!ss) {
+                return 1;
+            }
+            rid.Set(static_cast<int32_t>(key >> 32), static_cast<int>(key & 0xFFFFFFFF));
+            index_key.SetFromInteger(key);
+            tree->Insert(index_key, rid);
+            break;
+        case '?': std::cout << UsageMessage(); break;
+    }
 
-  strncpy(output, output_string.c_str(), len);
-  if (output_string.length() >= len) {
-    return 2;
-  }
+    tree->Draw(bpm, "test.out");
+    std::ifstream x("test.out");
+    while (x) {
+        std::string str;
+        std::getline(x, str);
+        output_string += str;
+    }
+    x.close();
+    remove("test.out");
 
-  return 0;
+    strncpy(output, output_string.c_str(), len);
+    if (output_string.length() >= len) {
+        return 2;
+    }
+
+    return 0;
 }
 }

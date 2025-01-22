@@ -24,7 +24,9 @@ TopNPerGroupExecutor::TopNPerGroupExecutor(ExecutorContext *exec_ctx, const TopN
     : AbstractExecutor(exec_ctx), plan_(plan), child_executor_(std::move(child_executor)) {}
 
 /** Initialize the TopNPerGroup */
-void TopNPerGroupExecutor::Init() { throw NotImplementedException("TopNPerGroupExecutor is not implemented"); }
+void TopNPerGroupExecutor::Init() {
+    throw NotImplementedException("TopNPerGroupExecutor is not implemented");
+}
 
 /**
  * Yield the next tuple from the TopNPerGroup.
@@ -32,6 +34,8 @@ void TopNPerGroupExecutor::Init() { throw NotImplementedException("TopNPerGroupE
  * @param[out] rid The next tuple RID produced by the TopNPerGroup
  * @return `true` if a tuple was produced, `false` if there are no more tuples
  */
-auto TopNPerGroupExecutor::Next(Tuple *tuple, RID *rid) -> bool { return false; }
+auto TopNPerGroupExecutor::Next(Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 }  // namespace bustub

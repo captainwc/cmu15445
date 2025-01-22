@@ -25,21 +25,21 @@ namespace bustub {
  * ClockReplacer implements the clock replacement policy, which approximates the Least Recently Used policy.
  */
 class ClockReplacer : public Replacer {
- public:
-  explicit ClockReplacer(size_t num_pages);
+public:
+    explicit ClockReplacer(size_t num_pages);
 
-  ~ClockReplacer() override;
+    ~ClockReplacer() override;
 
-  auto Victim(frame_id_t *frame_id) -> bool override;
+    auto Victim(frame_id_t *frame_id) -> bool override;
 
-  void Pin(frame_id_t frame_id) override;
+    void Pin(frame_id_t frame_id) override;
 
-  void Unpin(frame_id_t frame_id) override;
+    void Unpin(frame_id_t frame_id) override;
 
-  auto Size() -> size_t override;
+    auto Size() -> size_t override;
 
- private:
-  // TODO(student): implement me!
+private:
+    // TODO(student): implement me!
 };
 
 }  // namespace bustub

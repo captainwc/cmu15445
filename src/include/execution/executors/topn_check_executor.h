@@ -25,29 +25,29 @@ namespace bustub {
  * TopNCheckExecutor checks the number of items in TopN executor container
  */
 class TopNCheckExecutor : public AbstractExecutor {
- public:
-  TopNCheckExecutor(ExecutorContext *exec_ctx, const TopNPlanNode *plan,
-                    std::unique_ptr<AbstractExecutor> &&child_executor, TopNExecutor *topn_executor);
+public:
+    TopNCheckExecutor(ExecutorContext *exec_ctx, const TopNPlanNode *plan,
+                      std::unique_ptr<AbstractExecutor> &&child_executor, TopNExecutor *topn_executor);
 
-  void Init() override;
-  auto Next(Tuple *tuple, RID *rid) -> bool override;
+    void Init() override;
+    auto Next(Tuple *tuple, RID *rid) -> bool override;
 
-  /** @return The output schema for the child executor */
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); };
+    /** @return The output schema for the child executor */
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); };
 
- private:
-  /** TopNCheckExecutor returns `false` when child executor is exhausted */
-  constexpr static const bool EXECUTOR_EXHAUSTED{false};
+private:
+    /** TopNCheckExecutor returns `false` when child executor is exhausted */
+    constexpr static const bool EXECUTOR_EXHAUSTED{false};
 
-  /** The TopNPlanNode to be executed */
-  const TopNPlanNode *plan_;
+    /** The TopNPlanNode to be executed */
+    const TopNPlanNode *plan_;
 
-  std::size_t prev_{0};
+    std::size_t prev_{0};
 
-  /** The child executor from which tuples are obtained */
-  std::unique_ptr<AbstractExecutor> child_executor_;
+    /** The child executor from which tuples are obtained */
+    std::unique_ptr<AbstractExecutor> child_executor_;
 
-  TopNExecutor *topn_executor_;
+    TopNExecutor *topn_executor_;
 };
 
 }  // namespace bustub

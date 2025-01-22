@@ -28,22 +28,22 @@ namespace bustub {
  * Deleted values are always pulled from a child.
  */
 class DeleteExecutor : public AbstractExecutor {
- public:
-  DeleteExecutor(ExecutorContext *exec_ctx, const DeletePlanNode *plan,
-                 std::unique_ptr<AbstractExecutor> &&child_executor);
+public:
+    DeleteExecutor(ExecutorContext *exec_ctx, const DeletePlanNode *plan,
+                   std::unique_ptr<AbstractExecutor> &&child_executor);
 
-  void Init() override;
+    void Init() override;
 
-  auto Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool override;
+    auto Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool override;
 
-  /** @return The output schema for the delete */
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); };
+    /** @return The output schema for the delete */
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); };
 
- private:
-  /** The delete plan node to be executed */
-  const DeletePlanNode *plan_;
+private:
+    /** The delete plan node to be executed */
+    const DeletePlanNode *plan_;
 
-  /** The child executor from which RIDs for deleted tuples are pulled */
-  std::unique_ptr<AbstractExecutor> child_executor_;
+    /** The child executor from which RIDs for deleted tuples are pulled */
+    std::unique_ptr<AbstractExecutor> child_executor_;
 };
 }  // namespace bustub

@@ -26,21 +26,21 @@ namespace bustub {
  * The ValuesExecutor executor produces rows of values.
  */
 class ValuesExecutor : public AbstractExecutor {
- public:
-  ValuesExecutor(ExecutorContext *exec_ctx, const ValuesPlanNode *plan);
+public:
+    ValuesExecutor(ExecutorContext *exec_ctx, const ValuesPlanNode *plan);
 
-  void Init() override;
-  auto Next(Tuple *tuple, RID *rid) -> bool override;
+    void Init() override;
+    auto Next(Tuple *tuple, RID *rid) -> bool override;
 
-  /** @return The output schema for the values */
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
+    /** @return The output schema for the values */
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
 
- private:
-  /** The values plan node to be executed */
-  const ValuesPlanNode *plan_;
+private:
+    /** The values plan node to be executed */
+    const ValuesPlanNode *plan_;
 
-  const Schema dummy_schema_;
+    const Schema dummy_schema_;
 
-  size_t cursor_{0};
+    size_t cursor_{0};
 };
 }  // namespace bustub

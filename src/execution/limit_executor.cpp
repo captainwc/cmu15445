@@ -25,7 +25,9 @@ LimitExecutor::LimitExecutor(ExecutorContext *exec_ctx, const LimitPlanNode *pla
     : AbstractExecutor(exec_ctx) {}
 
 /** Initialize the limit */
-void LimitExecutor::Init() { throw NotImplementedException("LimitExecutor is not implemented"); }
+void LimitExecutor::Init() {
+    throw NotImplementedException("LimitExecutor is not implemented");
+}
 
 /**
  * Yield the next tuple from the limit.
@@ -33,6 +35,8 @@ void LimitExecutor::Init() { throw NotImplementedException("LimitExecutor is not
  * @param[out] rid The next tuple RID produced by the limit
  * @return `true` if a tuple was produced, `false` if there are no more tuples
  */
-auto LimitExecutor::Next(Tuple *tuple, RID *rid) -> bool { return false; }
+auto LimitExecutor::Next(Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 }  // namespace bustub

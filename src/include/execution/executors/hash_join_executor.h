@@ -26,20 +26,20 @@ namespace bustub {
  * HashJoinExecutor executes a nested-loop JOIN on two tables.
  */
 class HashJoinExecutor : public AbstractExecutor {
- public:
-  HashJoinExecutor(ExecutorContext *exec_ctx, const HashJoinPlanNode *plan,
-                   std::unique_ptr<AbstractExecutor> &&left_child, std::unique_ptr<AbstractExecutor> &&right_child);
+public:
+    HashJoinExecutor(ExecutorContext *exec_ctx, const HashJoinPlanNode *plan,
+                     std::unique_ptr<AbstractExecutor> &&left_child, std::unique_ptr<AbstractExecutor> &&right_child);
 
-  void Init() override;
+    void Init() override;
 
-  auto Next(Tuple *tuple, RID *rid) -> bool override;
+    auto Next(Tuple *tuple, RID *rid) -> bool override;
 
-  /** @return The output schema for the join */
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); };
+    /** @return The output schema for the join */
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); };
 
- private:
-  /** The HashJoin plan node to be executed. */
-  const HashJoinPlanNode *plan_;
+private:
+    /** The HashJoin plan node to be executed. */
+    const HashJoinPlanNode *plan_;
 };
 
 }  // namespace bustub

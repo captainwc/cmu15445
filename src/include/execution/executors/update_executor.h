@@ -29,27 +29,27 @@ namespace bustub {
  * Updated values are always pulled from a child.
  */
 class UpdateExecutor : public AbstractExecutor {
-  friend class UpdatePlanNode;
+    friend class UpdatePlanNode;
 
- public:
-  UpdateExecutor(ExecutorContext *exec_ctx, const UpdatePlanNode *plan,
-                 std::unique_ptr<AbstractExecutor> &&child_executor);
+public:
+    UpdateExecutor(ExecutorContext *exec_ctx, const UpdatePlanNode *plan,
+                   std::unique_ptr<AbstractExecutor> &&child_executor);
 
-  void Init() override;
+    void Init() override;
 
-  auto Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool override;
+    auto Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool override;
 
-  /** @return The output schema for the update */
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
+    /** @return The output schema for the update */
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
 
- private:
-  /** The update plan node to be executed */
-  const UpdatePlanNode *plan_;
+private:
+    /** The update plan node to be executed */
+    const UpdatePlanNode *plan_;
 
-  /** Metadata identifying the table that should be updated */
-  const TableInfo *table_info_;
+    /** Metadata identifying the table that should be updated */
+    const TableInfo *table_info_;
 
-  /** The child executor to obtain value from */
-  std::unique_ptr<AbstractExecutor> child_executor_;
+    /** The child executor to obtain value from */
+    std::unique_ptr<AbstractExecutor> child_executor_;
 };
 }  // namespace bustub

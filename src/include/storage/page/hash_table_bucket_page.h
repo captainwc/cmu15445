@@ -36,45 +36,45 @@ namespace bustub {
  */
 template <typename KeyType, typename ValueType, typename KeyComparator>
 class HashTableBucketPage {
- public:
-  // Delete all constructor / destructor to ensure memory safety
-  HashTableBucketPage() = delete;
+public:
+    // Delete all constructor / destructor to ensure memory safety
+    HashTableBucketPage() = delete;
 
-  auto GetValue(KeyType key, KeyComparator cmp, std::vector<ValueType> *result) -> bool;
+    auto GetValue(KeyType key, KeyComparator cmp, std::vector<ValueType> *result) -> bool;
 
-  auto Insert(KeyType key, ValueType value, KeyComparator cmp) -> bool;
+    auto Insert(KeyType key, ValueType value, KeyComparator cmp) -> bool;
 
-  auto Remove(KeyType key, ValueType value, KeyComparator cmp) -> bool;
+    auto Remove(KeyType key, ValueType value, KeyComparator cmp) -> bool;
 
-  auto KeyAt(uint32_t bucket_idx) const -> KeyType;
+    auto KeyAt(uint32_t bucket_idx) const -> KeyType;
 
-  auto ValueAt(uint32_t bucket_idx) const -> ValueType;
+    auto ValueAt(uint32_t bucket_idx) const -> ValueType;
 
-  void RemoveAt(uint32_t bucket_idx);
+    void RemoveAt(uint32_t bucket_idx);
 
-  auto IsOccupied(uint32_t bucket_idx) const -> bool;
+    auto IsOccupied(uint32_t bucket_idx) const -> bool;
 
-  void SetOccupied(uint32_t bucket_idx);
+    void SetOccupied(uint32_t bucket_idx);
 
-  auto IsReadable(uint32_t bucket_idx) const -> bool;
+    auto IsReadable(uint32_t bucket_idx) const -> bool;
 
-  void SetReadable(uint32_t bucket_idx);
+    void SetReadable(uint32_t bucket_idx);
 
-  auto NumReadable() -> uint32_t;
+    auto NumReadable() -> uint32_t;
 
-  auto IsFull() -> bool;
+    auto IsFull() -> bool;
 
-  auto IsEmpty() -> bool;
+    auto IsEmpty() -> bool;
 
-  void PrintBucket();
+    void PrintBucket();
 
- private:
-  //  For more on BUCKET_ARRAY_SIZE see storage/page/hash_table_page_defs.h
-  char occupied_[(BUCKET_ARRAY_SIZE - 1) / 8 + 1];
-  // 0 if tombstone/brand new (never occupied), 1 otherwise.
-  char readable_[(BUCKET_ARRAY_SIZE - 1) / 8 + 1];
-  // Flexible array member for page data.
-  MappingType array_[1];
+private:
+    //  For more on BUCKET_ARRAY_SIZE see storage/page/hash_table_page_defs.h
+    char occupied_[(BUCKET_ARRAY_SIZE - 1) / 8 + 1];
+    // 0 if tombstone/brand new (never occupied), 1 otherwise.
+    char readable_[(BUCKET_ARRAY_SIZE - 1) / 8 + 1];
+    // Flexible array member for page data.
+    MappingType array_[1];
 };
 
 }  // namespace bustub

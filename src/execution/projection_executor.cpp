@@ -11,6 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "execution/executors/projection_executor.h"
+
 #include "storage/table/tuple.h"
 
 namespace bustub {
@@ -26,8 +27,8 @@ ProjectionExecutor::ProjectionExecutor(ExecutorContext *exec_ctx, const Projecti
 
 /** Initialize the projection */
 void ProjectionExecutor::Init() {
-  // Initialize the child executor
-  child_executor_->Init();
+    // Initialize the child executor
+    child_executor_->Init();
 }
 
 /**
@@ -37,24 +38,24 @@ void ProjectionExecutor::Init() {
  * @return `true` if a tuple was produced, `false` if there are no more tuples
  */
 auto ProjectionExecutor::Next(Tuple *tuple, RID *rid) -> bool {
-  Tuple child_tuple{};
+    Tuple child_tuple{};
 
-  // Get the next tuple
-  const auto status = child_executor_->Next(&child_tuple, rid);
+    // Get the next tuple
+    const auto status = child_executor_->Next(&child_tuple, rid);
 
-  if (!status) {
-    return false;
-  }
+    if (!status) {
+        return false;
+    }
 
-  // Compute expressions
-  std::vector<Value> values{};
-  values.reserve(GetOutputSchema().GetColumnCount());
-  for (const auto &expr : plan_->GetExpressions()) {
-    values.push_back(expr->Evaluate(&child_tuple, child_executor_->GetOutputSchema()));
-  }
+    // Compute expressions
+    std::vector<Value> values{};
+    values.reserve(GetOutputSchema().GetColumnCount());
+    for (const auto &expr : plan_->GetExpressions()) {
+        values.push_back(expr->Evaluate(&child_tuple, child_executor_->GetOutputSchema()));
+    }
 
-  *tuple = Tuple{values, &GetOutputSchema()};
+    *tuple = Tuple{values, &GetOutputSchema()};
 
-  return true;
+    return true;
 }
 }  // namespace bustub

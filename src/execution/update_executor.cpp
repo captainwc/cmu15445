@@ -10,9 +10,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <memory>
-
 #include "execution/executors/update_executor.h"
+
+#include <memory>
 
 namespace bustub {
 
@@ -25,11 +25,13 @@ namespace bustub {
 UpdateExecutor::UpdateExecutor(ExecutorContext *exec_ctx, const UpdatePlanNode *plan,
                                std::unique_ptr<AbstractExecutor> &&child_executor)
     : AbstractExecutor(exec_ctx) {
-  // As of Fall 2022, you DON'T need to implement update executor to have perfect score in project 3 / project 4.
+    // As of Fall 2022, you DON'T need to implement update executor to have perfect score in project 3 / project 4.
 }
 
 /** Initialize the update */
-void UpdateExecutor::Init() { throw NotImplementedException("UpdateExecutor is not implemented"); }
+void UpdateExecutor::Init() {
+    throw NotImplementedException("UpdateExecutor is not implemented");
+}
 
 /**
  * Yield the next tuple from the update.
@@ -39,6 +41,8 @@ void UpdateExecutor::Init() { throw NotImplementedException("UpdateExecutor is n
  *
  * NOTE: UpdateExecutor::Next() does not use the `rid` out-parameter.
  */
-auto UpdateExecutor::Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool { return false; }
+auto UpdateExecutor::Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 }  // namespace bustub

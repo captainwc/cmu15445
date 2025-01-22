@@ -41,12 +41,12 @@
 namespace bustub {
 
 class KeywordHelper {
- public:
-  static auto IsKeyword(const std::string &text) -> bool;
+public:
+    static auto IsKeyword(const std::string &text) -> bool;
 
-  static auto RequiresQuotes(const std::string &text) -> bool;
+    static auto RequiresQuotes(const std::string &text) -> bool;
 
-  static auto WriteOptionallyQuoted(const std::string &text, char quote = '"') -> std::string;
+    static auto WriteOptionallyQuoted(const std::string &text, char quote = '"') -> std::string;
 };
 
 }  // namespace bustub

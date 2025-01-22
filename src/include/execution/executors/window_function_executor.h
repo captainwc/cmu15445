@@ -61,22 +61,22 @@ namespace bustub {
  *
  */
 class WindowFunctionExecutor : public AbstractExecutor {
- public:
-  WindowFunctionExecutor(ExecutorContext *exec_ctx, const WindowFunctionPlanNode *plan,
-                         std::unique_ptr<AbstractExecutor> &&child_executor);
+public:
+    WindowFunctionExecutor(ExecutorContext *exec_ctx, const WindowFunctionPlanNode *plan,
+                           std::unique_ptr<AbstractExecutor> &&child_executor);
 
-  void Init() override;
+    void Init() override;
 
-  auto Next(Tuple *tuple, RID *rid) -> bool override;
+    auto Next(Tuple *tuple, RID *rid) -> bool override;
 
-  /** @return The output schema for the window aggregation plan */
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
+    /** @return The output schema for the window aggregation plan */
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
 
- private:
-  /** The window aggregation plan node to be executed */
-  const WindowFunctionPlanNode *plan_;
+private:
+    /** The window aggregation plan node to be executed */
+    const WindowFunctionPlanNode *plan_;
 
-  /** The child executor from which tuples are obtained */
-  std::unique_ptr<AbstractExecutor> child_executor_;
+    /** The child executor from which tuples are obtained */
+    std::unique_ptr<AbstractExecutor> child_executor_;
 };
 }  // namespace bustub

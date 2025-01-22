@@ -10,9 +10,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <vector>
-
 #include "storage/index/linear_probe_hash_table_index.h"
+
+#include <vector>
 
 namespace bustub {
 /**
@@ -28,29 +28,29 @@ HASH_TABLE_INDEX_TYPE::LinearProbeHashTableIndex(std::unique_ptr<IndexMetadata> 
 
 template <typename KeyType, typename ValueType, typename KeyComparator>
 auto HASH_TABLE_INDEX_TYPE::InsertEntry(const Tuple &key, RID rid, Transaction *transaction) -> bool {
-  // construct insert index key
-  KeyType index_key;
-  index_key.SetFromKey(key);
+    // construct insert index key
+    KeyType index_key;
+    index_key.SetFromKey(key);
 
-  return container_.Insert(transaction, index_key, rid);
+    return container_.Insert(transaction, index_key, rid);
 }
 
 template <typename KeyType, typename ValueType, typename KeyComparator>
 void HASH_TABLE_INDEX_TYPE::DeleteEntry(const Tuple &key, RID rid, Transaction *transaction) {
-  // construct delete index key
-  KeyType index_key;
-  index_key.SetFromKey(key);
+    // construct delete index key
+    KeyType index_key;
+    index_key.SetFromKey(key);
 
-  container_.Remove(transaction, index_key, rid);
+    container_.Remove(transaction, index_key, rid);
 }
 
 template <typename KeyType, typename ValueType, typename KeyComparator>
 void HASH_TABLE_INDEX_TYPE::ScanKey(const Tuple &key, std::vector<RID> *result, Transaction *transaction) {
-  // construct scan index key
-  KeyType index_key;
-  index_key.SetFromKey(key);
+    // construct scan index key
+    KeyType index_key;
+    index_key.SetFromKey(key);
 
-  container_.GetValue(transaction, index_key, result);
+    container_.GetValue(transaction, index_key, result);
 }
 template class LinearProbeHashTableIndex<GenericKey<4>, RID, GenericComparator<4>>;
 template class LinearProbeHashTableIndex<GenericKey<8>, RID, GenericComparator<8>>;
