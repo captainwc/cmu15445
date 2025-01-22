@@ -9,11 +9,12 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include "storage/page/b_plus_tree_leaf_page.h"
+
 #include <sstream>
 
 #include "common/exception.h"
 #include "common/rid.h"
-#include "storage/page/b_plus_tree_leaf_page.h"
 
 namespace bustub {
 
@@ -32,7 +33,9 @@ void B_PLUS_TREE_LEAF_PAGE_TYPE::Init(int max_size) {}
  * Helper methods to set/get next page id
  */
 INDEX_TEMPLATE_ARGUMENTS
-auto B_PLUS_TREE_LEAF_PAGE_TYPE::GetNextPageId() const -> page_id_t { return INVALID_PAGE_ID; }
+auto B_PLUS_TREE_LEAF_PAGE_TYPE::GetNextPageId() const -> page_id_t {
+    return INVALID_PAGE_ID;
+}
 
 INDEX_TEMPLATE_ARGUMENTS
 void B_PLUS_TREE_LEAF_PAGE_TYPE::SetNextPageId(page_id_t next_page_id) {}
@@ -42,7 +45,9 @@ void B_PLUS_TREE_LEAF_PAGE_TYPE::SetNextPageId(page_id_t next_page_id) {}
  * array offset)
  */
 INDEX_TEMPLATE_ARGUMENTS
-auto B_PLUS_TREE_LEAF_PAGE_TYPE::KeyAt(int index) const -> KeyType { return {}; }
+auto B_PLUS_TREE_LEAF_PAGE_TYPE::KeyAt(int index) const -> KeyType {
+    return {};
+}
 
 template class BPlusTreeLeafPage<GenericKey<4>, RID, GenericComparator<4>>;
 template class BPlusTreeLeafPage<GenericKey<8>, RID, GenericComparator<8>>;

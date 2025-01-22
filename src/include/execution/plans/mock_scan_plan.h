@@ -27,28 +27,28 @@ namespace bustub {
  * NOTE: This class is used solely for testing.
  */
 class MockScanPlanNode : public AbstractPlanNode {
- public:
-  /**
-   * Construct a new MockScanPlanNode instance.
-   * @param output The output schema of this mock scan plan node
-   */
-  MockScanPlanNode(SchemaRef output, std::string table)
-      : AbstractPlanNode(std::move(output), {}), table_(std::move(table)) {}
+public:
+    /**
+     * Construct a new MockScanPlanNode instance.
+     * @param output The output schema of this mock scan plan node
+     */
+    MockScanPlanNode(SchemaRef output, std::string table)
+        : AbstractPlanNode(std::move(output), {}), table_(std::move(table)) {}
 
-  /** @return The type of the plan node */
-  auto GetType() const -> PlanType override { return PlanType::MockScan; }
+    /** @return The type of the plan node */
+    auto GetType() const -> PlanType override { return PlanType::MockScan; }
 
-  /** @return The table name of this mock scan node, used to determine the generated content. */
-  auto GetTable() const -> const std::string & { return table_; }
+    /** @return The table name of this mock scan node, used to determine the generated content. */
+    auto GetTable() const -> const std::string& { return table_; }
 
-  BUSTUB_PLAN_NODE_CLONE_WITH_CHILDREN(MockScanPlanNode);
+    BUSTUB_PLAN_NODE_CLONE_WITH_CHILDREN(MockScanPlanNode);
 
- protected:
-  auto PlanNodeToString() const -> std::string override { return fmt::format("MockScan {{ table={} }}", table_); }
+protected:
+    auto PlanNodeToString() const -> std::string override { return fmt::format("MockScan {{ table={} }}", table_); }
 
- private:
-  /** The table name of this mock scan executor */
-  std::string table_;
+private:
+    /** The table name of this mock scan executor */
+    std::string table_;
 };
 
 }  // namespace bustub

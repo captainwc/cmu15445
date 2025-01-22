@@ -28,28 +28,30 @@ namespace bustub {
 /**
  * Constructor: used for memory based manager
  */
-DiskManagerMemory::DiskManagerMemory(size_t pages) : pages_(pages) { memory_ = new char[pages * BUSTUB_PAGE_SIZE]; }
+DiskManagerMemory::DiskManagerMemory(size_t pages) : pages_(pages) {
+    memory_ = new char[pages * BUSTUB_PAGE_SIZE];
+}
 
 void DiskManagerMemory::IncreaseDiskSpace(size_t pages) {
-  BUSTUB_ASSERT(pages < pages_, "Ran out of disk space for limited memory disk manager implementation");
+    BUSTUB_ASSERT(pages < pages_, "Ran out of disk space for limited memory disk manager implementation");
 }
 
 /**
  * Write the contents of the specified page into disk file
  */
 void DiskManagerMemory::WritePage(page_id_t page_id, const char *page_data) {
-  size_t offset = static_cast<size_t>(page_id) * BUSTUB_PAGE_SIZE;
-  // set write cursor to offset
-  num_writes_ += 1;
-  memcpy(memory_ + offset, page_data, BUSTUB_PAGE_SIZE);
+    size_t offset = static_cast<size_t>(page_id) * BUSTUB_PAGE_SIZE;
+    // set write cursor to offset
+    num_writes_ += 1;
+    memcpy(memory_ + offset, page_data, BUSTUB_PAGE_SIZE);
 }
 
 /**
  * Read the contents of the specified page into the given memory area
  */
 void DiskManagerMemory::ReadPage(page_id_t page_id, char *page_data) {
-  int64_t offset = static_cast<int64_t>(page_id) * BUSTUB_PAGE_SIZE;
-  memcpy(page_data, memory_ + offset, BUSTUB_PAGE_SIZE);
+    int64_t offset = static_cast<int64_t>(page_id) * BUSTUB_PAGE_SIZE;
+    memcpy(page_data, memory_ + offset, BUSTUB_PAGE_SIZE);
 }
 
 }  // namespace bustub

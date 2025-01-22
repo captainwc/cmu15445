@@ -10,9 +10,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <memory>
-
 #include "execution/executors/delete_executor.h"
+
+#include <memory>
 
 namespace bustub {
 
@@ -20,8 +20,12 @@ DeleteExecutor::DeleteExecutor(ExecutorContext *exec_ctx, const DeletePlanNode *
                                std::unique_ptr<AbstractExecutor> &&child_executor)
     : AbstractExecutor(exec_ctx) {}
 
-void DeleteExecutor::Init() { throw NotImplementedException("DeleteExecutor is not implemented"); }
+void DeleteExecutor::Init() {
+    throw NotImplementedException("DeleteExecutor is not implemented");
+}
 
-auto DeleteExecutor::Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool { return false; }
+auto DeleteExecutor::Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 }  // namespace bustub

@@ -2,9 +2,7 @@
 
 #include "fort.hpp"
 
-
-int main(void)
-{
+int main(void) {
 #if defined(FT_HAVE_UTF8)
     fort::utf8_table table;
     table.set_border_style(FT_NICE_STYLE);
@@ -13,19 +11,39 @@ int main(void)
     table.column(1).set_cell_text_align(fort::text_align::center);
 
     /* Filling table with data */
-    table << fort::header
-          << "Тест" << "Итерации" << "ms/op" << "Тики" << "Результат" << fort::endr
-          << "n-body" << "1000" << "1.6" << "1,500,000" << "✔"<< fort::endr
-          << fort::separator
-          << "regex-redux" << "1000" << "0.8" << "8,000,000" << fort::endr
-          << "" << "2500" << "3.9" << "27,000,000" << "✖" << fort::endr
-          << "" << "10000" << "12.5" << "96,800,000" << fort::endr
-          << fort::separator
-          << "mandelbrot" << "1000" << "8.1" << "89,000,000" << fort::endr
-          << "" << "2500" << "19.8" << "320,000,000" << "✔" << fort::endr
-          << "" << "10000" << "60.7" << "987,000,000" << fort::endr
-          << fort::separator
-          << "Итог" << "" << "" << "" << "✖" << fort::endr;
+    table << fort::header << "Тест"
+          << "Итерации"
+          << "ms/op"
+          << "Тики"
+          << "Результат" << fort::endr << "n-body"
+          << "1000"
+          << "1.6"
+          << "1,500,000"
+          << "✔" << fort::endr << fort::separator << "regex-redux"
+          << "1000"
+          << "0.8"
+          << "8,000,000" << fort::endr << ""
+          << "2500"
+          << "3.9"
+          << "27,000,000"
+          << "✖" << fort::endr << ""
+          << "10000"
+          << "12.5"
+          << "96,800,000" << fort::endr << fort::separator << "mandelbrot"
+          << "1000"
+          << "8.1"
+          << "89,000,000" << fort::endr << ""
+          << "2500"
+          << "19.8"
+          << "320,000,000"
+          << "✔" << fort::endr << ""
+          << "10000"
+          << "60.7"
+          << "987,000,000" << fort::endr << fort::separator << "Итог"
+          << ""
+          << ""
+          << ""
+          << "✖" << fort::endr;
 
     table[8][0].set_cell_span(4);
 

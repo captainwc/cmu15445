@@ -34,74 +34,74 @@ class Transaction;
  * mapping relation and does the conversion between tuple key and index key
  */
 class IndexMetadata {
- public:
-  IndexMetadata() = delete;
+public:
+    IndexMetadata() = delete;
 
-  /**
-   * Construct a new IndexMetadata instance.
-   * @param index_name The name of the index
-   * @param table_name The name of the table on which the index is created
-   * @param tuple_schema The schema of the indexed key
-   * @param key_attrs The mapping from indexed columns to base table columns
-   */
-  IndexMetadata(std::string index_name, std::string table_name, const Schema *tuple_schema,
-                std::vector<uint32_t> key_attrs, bool is_primary_key)
-      : name_(std::move(index_name)),
-        table_name_(std::move(table_name)),
-        key_attrs_(std::move(key_attrs)),
-        is_primary_key_(is_primary_key) {
-    key_schema_ = std::make_shared<Schema>(Schema::CopySchema(tuple_schema, key_attrs_));
-  }
+    /**
+     * Construct a new IndexMetadata instance.
+     * @param index_name The name of the index
+     * @param table_name The name of the table on which the index is created
+     * @param tuple_schema The schema of the indexed key
+     * @param key_attrs The mapping from indexed columns to base table columns
+     */
+    IndexMetadata(std::string index_name, std::string table_name, const Schema *tuple_schema,
+                  std::vector<uint32_t> key_attrs, bool is_primary_key)
+        : name_(std::move(index_name)),
+          table_name_(std::move(table_name)),
+          key_attrs_(std::move(key_attrs)),
+          is_primary_key_(is_primary_key) {
+        key_schema_ = std::make_shared<Schema>(Schema::CopySchema(tuple_schema, key_attrs_));
+    }
 
-  ~IndexMetadata() = default;
+    ~IndexMetadata() = default;
 
-  /** @return The name of the index */
-  inline auto GetName() const -> const std::string & { return name_; }
+    /** @return The name of the index */
+    inline auto GetName() const -> const std::string & { return name_; }
 
-  /** @return The name of the table on which the index is created */
-  inline auto GetTableName() -> const std::string & { return table_name_; }
+    /** @return The name of the table on which the index is created */
+    inline auto GetTableName() -> const std::string & { return table_name_; }
 
-  /** @return A schema object pointer that represents the indexed key */
-  inline auto GetKeySchema() const -> Schema * { return key_schema_.get(); }
+    /** @return A schema object pointer that represents the indexed key */
+    inline auto GetKeySchema() const -> Schema * { return key_schema_.get(); }
 
-  /**
-   * @return The number of columns inside index key (not in tuple key)
-   *
-   * NOTE: this must be defined inside the cpp source file because it
-   * uses the member of catalog::Schema which is not known here.
-   */
-  auto GetIndexColumnCount() const -> std::uint32_t { return static_cast<uint32_t>(key_attrs_.size()); }
+    /**
+     * @return The number of columns inside index key (not in tuple key)
+     *
+     * NOTE: this must be defined inside the cpp source file because it
+     * uses the member of catalog::Schema which is not known here.
+     */
+    auto GetIndexColumnCount() const -> std::uint32_t { return static_cast<uint32_t>(key_attrs_.size()); }
 
-  /** @return The mapping relation between indexed columns and base table columns */
-  inline auto GetKeyAttrs() const -> const std::vector<uint32_t> & { return key_attrs_; }
+    /** @return The mapping relation between indexed columns and base table columns */
+    inline auto GetKeyAttrs() const -> const std::vector<uint32_t> & { return key_attrs_; }
 
-  /** @return is primary key */
-  inline auto IsPrimaryKey() const -> bool { return is_primary_key_; }
+    /** @return is primary key */
+    inline auto IsPrimaryKey() const -> bool { return is_primary_key_; }
 
-  /** @return A string representation for debugging */
-  auto ToString() const -> std::string {
-    std::stringstream os;
+    /** @return A string representation for debugging */
+    auto ToString() const -> std::string {
+        std::stringstream os;
 
-    os << "IndexMetadata["
-       << "Name = " << name_ << ", "
-       << "Type = B+Tree, "
-       << "Table name = " << table_name_ << "] :: ";
-    os << key_schema_->ToString();
+        os << "IndexMetadata["
+           << "Name = " << name_ << ", "
+           << "Type = B+Tree, "
+           << "Table name = " << table_name_ << "] :: ";
+        os << key_schema_->ToString();
 
-    return os.str();
-  }
+        return os.str();
+    }
 
- private:
-  /** The name of the index */
-  std::string name_;
-  /** The name of the table on which the index is created */
-  std::string table_name_;
-  /** The mapping relation between key schema and tuple schema */
-  const std::vector<uint32_t> key_attrs_;
-  /** The schema of the indexed key */
-  std::shared_ptr<Schema> key_schema_;
-  /** Is primary key? */
-  bool is_primary_key_;
+private:
+    /** The name of the index */
+    std::string name_;
+    /** The name of the table on which the index is created */
+    std::string table_name_;
+    /** The mapping relation between key schema and tuple schema */
+    const std::vector<uint32_t> key_attrs_;
+    /** The schema of the indexed key */
+    std::shared_ptr<Schema> key_schema_;
+    /** Is primary key? */
+    bool is_primary_key_;
 };
 
 /////////////////////////////////////////////////////////////////////
@@ -123,70 +123,70 @@ class IndexMetadata {
  * the type of expressions inside the predicate.
  */
 class Index {
- public:
-  /**
-   * Construct a new Index instance.
-   * @param metadata An owning pointer to the index metadata
-   */
-  explicit Index(std::unique_ptr<IndexMetadata> &&metadata) : metadata_{std::move(metadata)} {}
+public:
+    /**
+     * Construct a new Index instance.
+     * @param metadata An owning pointer to the index metadata
+     */
+    explicit Index(std::unique_ptr<IndexMetadata> &&metadata) : metadata_{std::move(metadata)} {}
 
-  virtual ~Index() = default;
+    virtual ~Index() = default;
 
-  /** @return A non-owning pointer to the metadata object associated with the index */
-  auto GetMetadata() const -> IndexMetadata * { return metadata_.get(); }
+    /** @return A non-owning pointer to the metadata object associated with the index */
+    auto GetMetadata() const -> IndexMetadata * { return metadata_.get(); }
 
-  /** @return The number of indexed columns */
-  auto GetIndexColumnCount() const -> std::uint32_t { return metadata_->GetIndexColumnCount(); }
+    /** @return The number of indexed columns */
+    auto GetIndexColumnCount() const -> std::uint32_t { return metadata_->GetIndexColumnCount(); }
 
-  /** @return The index name */
-  auto GetName() const -> const std::string & { return metadata_->GetName(); }
+    /** @return The index name */
+    auto GetName() const -> const std::string & { return metadata_->GetName(); }
 
-  /** @return The index key schema */
-  auto GetKeySchema() const -> Schema * { return metadata_->GetKeySchema(); }
+    /** @return The index key schema */
+    auto GetKeySchema() const -> Schema * { return metadata_->GetKeySchema(); }
 
-  /** @return The index key attributes */
-  auto GetKeyAttrs() const -> const std::vector<uint32_t> & { return metadata_->GetKeyAttrs(); }
+    /** @return The index key attributes */
+    auto GetKeyAttrs() const -> const std::vector<uint32_t> & { return metadata_->GetKeyAttrs(); }
 
-  /** @return A string representation for debugging */
-  auto ToString() const -> std::string {
-    std::stringstream os;
-    os << "INDEX: (" << GetName() << ")";
-    os << metadata_->ToString();
-    return os.str();
-  }
+    /** @return A string representation for debugging */
+    auto ToString() const -> std::string {
+        std::stringstream os;
+        os << "INDEX: (" << GetName() << ")";
+        os << metadata_->ToString();
+        return os.str();
+    }
 
-  ///////////////////////////////////////////////////////////////////
-  // Point Modification
-  ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    // Point Modification
+    ///////////////////////////////////////////////////////////////////
 
-  /**
-   * Insert an entry into the index.
-   * @param key The index key
-   * @param rid The RID associated with the key
-   * @param transaction The transaction context
-   * @returns whether insertion is successful
-   */
-  virtual auto InsertEntry(const Tuple &key, RID rid, Transaction *transaction) -> bool = 0;
+    /**
+     * Insert an entry into the index.
+     * @param key The index key
+     * @param rid The RID associated with the key
+     * @param transaction The transaction context
+     * @returns whether insertion is successful
+     */
+    virtual auto InsertEntry(const Tuple &key, RID rid, Transaction *transaction) -> bool = 0;
 
-  /**
-   * Delete an index entry by key.
-   * @param key The index key
-   * @param rid The RID associated with the key (unused)
-   * @param transaction The transaction context
-   */
-  virtual void DeleteEntry(const Tuple &key, RID rid, Transaction *transaction) = 0;
+    /**
+     * Delete an index entry by key.
+     * @param key The index key
+     * @param rid The RID associated with the key (unused)
+     * @param transaction The transaction context
+     */
+    virtual void DeleteEntry(const Tuple &key, RID rid, Transaction *transaction) = 0;
 
-  /**
-   * Search the index for the provided key.
-   * @param key The index key
-   * @param result The collection of RIDs that is populated with results of the search
-   * @param transaction The transaction context
-   */
-  virtual void ScanKey(const Tuple &key, std::vector<RID> *result, Transaction *transaction) = 0;
+    /**
+     * Search the index for the provided key.
+     * @param key The index key
+     * @param result The collection of RIDs that is populated with results of the search
+     * @param transaction The transaction context
+     */
+    virtual void ScanKey(const Tuple &key, std::vector<RID> *result, Transaction *transaction) = 0;
 
- protected:
-  /** The Index structure owns its metadata */
-  std::unique_ptr<IndexMetadata> metadata_;
+protected:
+    /** The Index structure owns its metadata */
+    std::unique_ptr<IndexMetadata> metadata_;
 };
 
 }  // namespace bustub

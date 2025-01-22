@@ -3,8 +3,7 @@
 
 #include "fort_utils.h"
 
-
-#define INVALID_VEC_INDEX ((size_t) -1)
+#define INVALID_VEC_INDEX ((size_t)-1)
 
 FT_INTERNAL
 f_vector_t *create_vector(size_t item_size, size_t capacity);
@@ -44,13 +43,11 @@ int vector_erase(f_vector_t *, size_t index);
 
 #ifdef FT_TEST_BUILD
 f_vector_t *copy_vector(f_vector_t *);
-size_t vector_index_of(const f_vector_t *, const void *item);
+size_t      vector_index_of(const f_vector_t *, const void *item);
 #endif
 
-#define VECTOR_AT(vector, pos, data_type) \
-    *(data_type *)vector_at((vector), (pos))
+#define VECTOR_AT(vector, pos, data_type) *(data_type *)vector_at((vector), (pos))
 
-#define VECTOR_AT_C(vector, pos, const_data_type) \
-    *(const_data_type *)vector_at_c((vector), (pos))
+#define VECTOR_AT_C(vector, pos, const_data_type) *(const_data_type *)vector_at_c((vector), (pos))
 
 #endif /* VECTOR_H */

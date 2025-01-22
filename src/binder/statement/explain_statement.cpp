@@ -1,5 +1,4 @@
 #include "binder/statement/explain_statement.h"
-#include "fmt/ranges.h"
 
 #include "binder/binder.h"
 #include "binder/bound_expression.h"
@@ -8,6 +7,7 @@
 #include "binder/statement/insert_statement.h"
 #include "binder/statement/select_statement.h"
 #include "common/util/string_util.h"
+#include "fmt/ranges.h"
 
 namespace bustub {
 
@@ -15,8 +15,8 @@ ExplainStatement::ExplainStatement(std::unique_ptr<BoundStatement> statement, ui
     : BoundStatement(StatementType::EXPLAIN_STATEMENT), statement_(std::move(statement)), options_(options) {}
 
 auto ExplainStatement::ToString() const -> std::string {
-  return fmt::format("BoundExplain {{\n  statement={},\n  options={},\n}}",
-                     StringUtil::IndentAllLines(statement_->ToString(), 2, true), options_);
+    return fmt::format("BoundExplain {{\n  statement={},\n  options={},\n}}",
+                       StringUtil::IndentAllLines(statement_->ToString(), 2, true), options_);
 }
 
 }  // namespace bustub

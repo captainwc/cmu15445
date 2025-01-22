@@ -61,15 +61,15 @@ extern "C" {
 #endif
 
 #if defined(__clang__) || defined(__GNUC__)
-#define utf8_nonnull __attribute__((nonnull))
-#define utf8_pure __attribute__((pure))
+#define utf8_nonnull  __attribute__((nonnull))
+#define utf8_pure     __attribute__((pure))
 #define utf8_restrict __restrict__
-#define utf8_weak __attribute__((weak))
+#define utf8_weak     __attribute__((weak))
 #elif defined(_MSC_VER)
 #define utf8_nonnull
 #define utf8_pure
 #define utf8_restrict __restrict
-#define utf8_weak __inline
+#define utf8_weak     __inline
 #else
 #define utf8_nonnull
 #define utf8_pure
@@ -85,30 +85,24 @@ extern "C" {
 
 // Return less than 0, 0, greater than 0 if src1 < src2, src1 == src2, src1 >
 // src2 respectively, case insensitive.
-utf8_nonnull utf8_pure utf8_weak int utf8casecmp(const void *src1,
-        const void *src2);
+utf8_nonnull utf8_pure utf8_weak int utf8casecmp(const void *src1, const void *src2);
 
 // Append the utf8 string src onto the utf8 string dst.
-utf8_nonnull utf8_weak void *utf8cat(void *utf8_restrict dst,
-                                     const void *utf8_restrict src);
+utf8_nonnull utf8_weak void *utf8cat(void *utf8_restrict dst, const void *utf8_restrict src);
 
 // Find the first match of the utf8 codepoint chr in the utf8 string src.
-utf8_nonnull utf8_pure utf8_weak void *utf8chr(const void *src,
-        utf8_int32_t chr);
+utf8_nonnull utf8_pure utf8_weak void *utf8chr(const void *src, utf8_int32_t chr);
 
 // Return less than 0, 0, greater than 0 if src1 < src2,
 // src1 == src2, src1 > src2 respectively.
-utf8_nonnull utf8_pure utf8_weak int utf8cmp(const void *src1,
-        const void *src2);
+utf8_nonnull utf8_pure utf8_weak int utf8cmp(const void *src1, const void *src2);
 
 // Copy the utf8 string src onto the memory allocated in dst.
-utf8_nonnull utf8_weak void *utf8cpy(void *utf8_restrict dst,
-                                     const void *utf8_restrict src);
+utf8_nonnull utf8_weak void *utf8cpy(void *utf8_restrict dst, const void *utf8_restrict src);
 
 // Number of utf8 codepoints in the utf8 string src that consists entirely
 // of utf8 codepoints not from the utf8 string reject.
-utf8_nonnull utf8_pure utf8_weak size_t utf8cspn(const void *src,
-        const void *reject);
+utf8_nonnull utf8_pure utf8_weak size_t utf8cspn(const void *src, const void *reject);
 
 // Duplicate the utf8 string src by getting its size, malloc'ing a new buffer
 // copying over the data, and returning that. Or 0 if malloc failed.
@@ -127,20 +121,17 @@ utf8_nonnull utf8_pure utf8_weak int utf8cwidth(utf8_int32_t c);
 // Return less than 0, 0, greater than 0 if src1 < src2, src1 == src2, src1 >
 // src2 respectively, case insensitive. Checking at most n bytes of each utf8
 // string.
-utf8_nonnull utf8_pure utf8_weak int utf8ncasecmp(const void *src1,
-        const void *src2, size_t n);
+utf8_nonnull utf8_pure utf8_weak int utf8ncasecmp(const void *src1, const void *src2, size_t n);
 
 // Append the utf8 string src onto the utf8 string dst,
 // writing at most n+1 bytes. Can produce an invalid utf8
 // string if n falls partway through a utf8 codepoint.
-utf8_nonnull utf8_weak void *utf8ncat(void *utf8_restrict dst,
-                                      const void *utf8_restrict src, size_t n);
+utf8_nonnull utf8_weak void *utf8ncat(void *utf8_restrict dst, const void *utf8_restrict src, size_t n);
 
 // Return less than 0, 0, greater than 0 if src1 < src2,
 // src1 == src2, src1 > src2 respectively. Checking at most n
 // bytes of each utf8 string.
-utf8_nonnull utf8_pure utf8_weak int utf8ncmp(const void *src1,
-        const void *src2, size_t n);
+utf8_nonnull utf8_pure utf8_weak int utf8ncmp(const void *src1, const void *src2, size_t n);
 
 // Copy the utf8 string src onto the memory allocated in dst.
 // Copies at most n bytes. If there is no terminating null byte in
@@ -149,8 +140,7 @@ utf8_nonnull utf8_pure utf8_weak int utf8ncmp(const void *src1,
 // extra null terminating bytes are appended to dst such that at
 // total of n bytes are written. Can produce an invalid utf8
 // string if n falls partway through a utf8 codepoint.
-utf8_nonnull utf8_weak void *utf8ncpy(void *utf8_restrict dst,
-                                      const void *utf8_restrict src, size_t n);
+utf8_nonnull utf8_weak void *utf8ncpy(void *utf8_restrict dst, const void *utf8_restrict src, size_t n);
 
 // Similar to utf8dup, except that at most n bytes of src are copied. If src is
 // longer than n, only n bytes are copied and a null byte is added.
@@ -160,8 +150,7 @@ utf8_nonnull utf8_weak void *utf8ndup(const void *src, size_t n);
 
 // Locates the first occurence in the utf8 string str of any byte in the
 // utf8 string accept, or 0 if no match was found.
-utf8_nonnull utf8_pure utf8_weak void *utf8pbrk(const void *str,
-        const void *accept);
+utf8_nonnull utf8_pure utf8_weak void *utf8pbrk(const void *str, const void *accept);
 
 // Find the last match of the utf8 codepoint chr in the utf8 string src.
 utf8_nonnull utf8_pure utf8_weak void *utf8rchr(const void *src, int chr);
@@ -172,17 +161,14 @@ utf8_nonnull utf8_pure utf8_weak size_t utf8size(const void *str);
 
 // Number of utf8 codepoints in the utf8 string src that consists entirely
 // of utf8 codepoints from the utf8 string accept.
-utf8_nonnull utf8_pure utf8_weak size_t utf8spn(const void *src,
-        const void *accept);
+utf8_nonnull utf8_pure utf8_weak size_t utf8spn(const void *src, const void *accept);
 
 // The position of the utf8 string needle in the utf8 string haystack.
-utf8_nonnull utf8_pure utf8_weak void *utf8str(const void *haystack,
-        const void *needle);
+utf8_nonnull utf8_pure utf8_weak void *utf8str(const void *haystack, const void *needle);
 
 // The position of the utf8 string needle in the utf8 string haystack, case
 // insensitive.
-utf8_nonnull utf8_pure utf8_weak void *utf8casestr(const void *haystack,
-        const void *needle);
+utf8_nonnull utf8_pure utf8_weak void *utf8casestr(const void *haystack, const void *needle);
 
 // Return 0 on success, or the position of the invalid
 // utf8 codepoint on failure.
@@ -190,9 +176,7 @@ utf8_nonnull utf8_pure utf8_weak void *utf8valid(const void *str);
 
 // Sets out_codepoint to the next utf8 codepoint in str, and returns the address
 // of the utf8 codepoint after the current one in str.
-utf8_nonnull utf8_weak void *
-utf8codepoint(const void *utf8_restrict str,
-              utf8_int32_t *utf8_restrict out_codepoint);
+utf8_nonnull utf8_weak void *utf8codepoint(const void *utf8_restrict str, utf8_int32_t *utf8_restrict out_codepoint);
 
 // Returns the size of the given codepoint in bytes.
 utf8_weak size_t utf8codepointsize(utf8_int32_t chr);
@@ -201,8 +185,7 @@ utf8_weak size_t utf8codepointsize(utf8_int32_t chr);
 // place after the written codepoint. Pass how many bytes left in the buffer to
 // n. If there is not enough space for the codepoint, this function returns
 // null.
-utf8_nonnull utf8_weak void *utf8catcodepoint(void *utf8_restrict str,
-        utf8_int32_t chr, size_t n);
+utf8_nonnull utf8_weak void *utf8catcodepoint(void *utf8_restrict str, utf8_int32_t chr, size_t n);
 
 // Returns 1 if the given character is lowercase, or 0 if it is not.
 utf8_weak int utf8islower(utf8_int32_t chr);
@@ -226,8 +209,7 @@ utf8_weak utf8_int32_t utf8uprcodepoint(utf8_int32_t cp);
 #undef utf8_pure
 #undef utf8_nonnull
 
-int utf8casecmp(const void *src1, const void *src2)
-{
+int utf8casecmp(const void *src1, const void *src2) {
     utf8_int32_t src1_cp, src2_cp, src1_orig_cp, src2_orig_cp;
 
     for (;;) {
@@ -258,9 +240,8 @@ int utf8casecmp(const void *src1, const void *src2)
     }
 }
 
-void *utf8cat(void *utf8_restrict dst, const void *utf8_restrict src)
-{
-    char *d = (char *)dst;
+void *utf8cat(void *utf8_restrict dst, const void *utf8_restrict src) {
+    char       *d = (char *)dst;
     const char *s = (const char *)src;
 
     // find the null terminating byte in dst
@@ -279,8 +260,7 @@ void *utf8cat(void *utf8_restrict dst, const void *utf8_restrict src)
     return dst;
 }
 
-void *utf8chr(const void *src, utf8_int32_t chr)
-{
+void *utf8chr(const void *src, utf8_int32_t chr) {
     char c[5] = {'\0', '\0', '\0', '\0', '\0'};
 
     if (0 == chr) {
@@ -306,7 +286,7 @@ void *utf8chr(const void *src, utf8_int32_t chr)
         c[0] = 0xe0 | (char)(chr >> 12);
         c[1] = 0x80 | (char)((chr >> 6) & 0x3f);
         c[2] = 0x80 | (char)(chr & 0x3f);
-    } else { // if (0 == ((int)0xffe00000 & chr)) {
+    } else {  // if (0 == ((int)0xffe00000 & chr)) {
         // 4-byte/21-bit utf8 code point
         // (0b11110xxx 0b10xxxxxx 0b10xxxxxx 0b10xxxxxx)
         c[0] = 0xf0 | (char)(chr >> 18);
@@ -321,8 +301,7 @@ void *utf8chr(const void *src, utf8_int32_t chr)
     return utf8str(src, c);
 }
 
-int utf8cmp(const void *src1, const void *src2)
-{
+int utf8cmp(const void *src1, const void *src2) {
     const unsigned char *s1 = (const unsigned char *)src1;
     const unsigned char *s2 = (const unsigned char *)src2;
 
@@ -343,9 +322,8 @@ int utf8cmp(const void *src1, const void *src2)
 
 int utf8coll(const void *src1, const void *src2);
 
-void *utf8cpy(void *utf8_restrict dst, const void *utf8_restrict src)
-{
-    char *d = (char *)dst;
+void *utf8cpy(void *utf8_restrict dst, const void *utf8_restrict src) {
+    char       *d = (char *)dst;
     const char *s = (const char *)src;
 
     // overwriting anything previously in dst, write byte-by-byte
@@ -360,14 +338,13 @@ void *utf8cpy(void *utf8_restrict dst, const void *utf8_restrict src)
     return dst;
 }
 
-size_t utf8cspn(const void *src, const void *reject)
-{
-    const char *s = (const char *)src;
-    size_t chars = 0;
+size_t utf8cspn(const void *src, const void *reject) {
+    const char *s     = (const char *)src;
+    size_t      chars = 0;
 
     while ('\0' != *s) {
-        const char *r = (const char *)reject;
-        size_t offset = 0;
+        const char *r      = (const char *)reject;
+        size_t      offset = 0;
 
         while ('\0' != *r) {
             // checking that if *r is the start of a utf8 codepoint
@@ -409,10 +386,9 @@ size_t utf8cspn(const void *src, const void *reject)
 
 size_t utf8size(const void *str);
 
-void *utf8dup(const void *src)
-{
+void *utf8dup(const void *src) {
     const char *s = (const char *)src;
-    char *n = utf8_null;
+    char       *n = utf8_null;
 
     // figure out how many bytes (including the terminator) we need to copy first
     size_t bytes = utf8size(src);
@@ -439,10 +415,9 @@ void *utf8dup(const void *src)
 
 void *utf8fry(const void *str);
 
-size_t utf8len(const void *str)
-{
-    const unsigned char *s = (const unsigned char *)str;
-    size_t length = 0;
+size_t utf8len(const void *str) {
+    const unsigned char *s      = (const unsigned char *)str;
+    size_t               length = 0;
 
     while ('\0' != *s) {
         if (0xf0 == (0xf8 & *s)) {
@@ -454,7 +429,7 @@ size_t utf8len(const void *str)
         } else if (0xc0 == (0xe0 & *s)) {
             // 2-byte utf8 code point (began with 0b110xxxxx)
             s += 2;
-        } else { // if (0x00 == (0x80 & *s)) {
+        } else {  // if (0x00 == (0x80 & *s)) {
             // 1-byte ascii (began with 0b0xxxxxxx)
             s += 1;
         }
@@ -470,8 +445,7 @@ size_t utf8len(const void *str)
 // See
 // https://unicode.org/Public/UNIDATA/EastAsianWidth.txt
 // http://www.unicode.org/reports/tr11/tr11-33.html
-int utf8cwidth(utf8_int32_t c)
-{
+int utf8cwidth(utf8_int32_t c) {
     // TODO: add non printable characters check
     if (c == 0)
         return 0;
@@ -480,61 +454,33 @@ int utf8cwidth(utf8_int32_t c)
         return 1;
 
     // Fullwidth
-    if ((0x3000 == c) ||
-        (0xFF01 <= c && c <= 0xFF60) ||
-        (0xFFE0 <= c && c <= 0xFFE6)) {
+    if ((0x3000 == c) || (0xFF01 <= c && c <= 0xFF60) || (0xFFE0 <= c && c <= 0xFFE6)) {
         return 2;
     }
 
     // Wide
-    if ((0x1100 <= c && c <= 0x115F) ||
-        (0x11A3 <= c && c <= 0x11A7) ||
-        (0x11FA <= c && c <= 0x11FF) ||
-        (0x2329 <= c && c <= 0x232A) ||
-        (0x2E80 <= c && c <= 0x2E99) ||
-        (0x2E9B <= c && c <= 0x2EF3) ||
-        (0x2F00 <= c && c <= 0x2FD5) ||
-        (0x2FF0 <= c && c <= 0x2FFB) ||
-        (0x3001 <= c && c <= 0x303E) ||
-        (0x3041 <= c && c <= 0x3096) ||
-        (0x3099 <= c && c <= 0x30FF) ||
-        (0x3105 <= c && c <= 0x312D) ||
-        (0x3131 <= c && c <= 0x318E) ||
-        (0x3190 <= c && c <= 0x31BA) ||
-        (0x31C0 <= c && c <= 0x31E3) ||
-        (0x31F0 <= c && c <= 0x321E) ||
-        (0x3220 <= c && c <= 0x3247) ||
-        (0x3250 <= c && c <= 0x32FE) ||
-        (0x3300 <= c && c <= 0x4DBF) ||
-        (0x4E00 <= c && c <= 0xA48C) ||
-        (0xA490 <= c && c <= 0xA4C6) ||
-        (0xA960 <= c && c <= 0xA97C) ||
-        (0xAC00 <= c && c <= 0xD7A3) ||
-        (0xD7B0 <= c && c <= 0xD7C6) ||
-        (0xD7CB <= c && c <= 0xD7FB) ||
-        (0xF900 <= c && c <= 0xFAFF) ||
-        (0xFE10 <= c && c <= 0xFE19) ||
-        (0xFE30 <= c && c <= 0xFE52) ||
-        (0xFE54 <= c && c <= 0xFE66) ||
-        (0xFE68 <= c && c <= 0xFE6B) ||
-        (0x1B000 <= c && c <= 0x1B001) ||
-        (0x1F200 <= c && c <= 0x1F202) ||
-        (0x1F210 <= c && c <= 0x1F23A) ||
-        (0x1F240 <= c && c <= 0x1F248) ||
-        (0x1F250 <= c && c <= 0x1F251) ||
-        (0x20000 <= c && c <= 0x2F73F) ||
-        (0x2B740 <= c && c <= 0x2FFFD) ||
-        (0x30000 <= c && c <= 0x3FFFD)) {
+    if ((0x1100 <= c && c <= 0x115F) || (0x11A3 <= c && c <= 0x11A7) || (0x11FA <= c && c <= 0x11FF)
+        || (0x2329 <= c && c <= 0x232A) || (0x2E80 <= c && c <= 0x2E99) || (0x2E9B <= c && c <= 0x2EF3)
+        || (0x2F00 <= c && c <= 0x2FD5) || (0x2FF0 <= c && c <= 0x2FFB) || (0x3001 <= c && c <= 0x303E)
+        || (0x3041 <= c && c <= 0x3096) || (0x3099 <= c && c <= 0x30FF) || (0x3105 <= c && c <= 0x312D)
+        || (0x3131 <= c && c <= 0x318E) || (0x3190 <= c && c <= 0x31BA) || (0x31C0 <= c && c <= 0x31E3)
+        || (0x31F0 <= c && c <= 0x321E) || (0x3220 <= c && c <= 0x3247) || (0x3250 <= c && c <= 0x32FE)
+        || (0x3300 <= c && c <= 0x4DBF) || (0x4E00 <= c && c <= 0xA48C) || (0xA490 <= c && c <= 0xA4C6)
+        || (0xA960 <= c && c <= 0xA97C) || (0xAC00 <= c && c <= 0xD7A3) || (0xD7B0 <= c && c <= 0xD7C6)
+        || (0xD7CB <= c && c <= 0xD7FB) || (0xF900 <= c && c <= 0xFAFF) || (0xFE10 <= c && c <= 0xFE19)
+        || (0xFE30 <= c && c <= 0xFE52) || (0xFE54 <= c && c <= 0xFE66) || (0xFE68 <= c && c <= 0xFE6B)
+        || (0x1B000 <= c && c <= 0x1B001) || (0x1F200 <= c && c <= 0x1F202) || (0x1F210 <= c && c <= 0x1F23A)
+        || (0x1F240 <= c && c <= 0x1F248) || (0x1F250 <= c && c <= 0x1F251) || (0x20000 <= c && c <= 0x2F73F)
+        || (0x2B740 <= c && c <= 0x2FFFD) || (0x30000 <= c && c <= 0x3FFFD)) {
         return 2;
     }
 
     return 1;
 }
 
-size_t utf8width(const void *str)
-{
-    size_t length = 0;
-    utf8_int32_t c = 0;
+size_t utf8width(const void *str) {
+    size_t       length = 0;
+    utf8_int32_t c      = 0;
 
     str = utf8codepoint(str, &c);
     while (c != 0) {
@@ -544,8 +490,7 @@ size_t utf8width(const void *str)
     return length;
 }
 
-int utf8ncasecmp(const void *src1, const void *src2, size_t n)
-{
+int utf8ncasecmp(const void *src1, const void *src2, size_t n) {
     utf8_int32_t src1_cp, src2_cp, src1_orig_cp, src2_orig_cp;
 
     do {
@@ -628,10 +573,8 @@ int utf8ncasecmp(const void *src1, const void *src2, size_t n)
     return 0;
 }
 
-void *utf8ncat(void *utf8_restrict dst, const void *utf8_restrict src,
-               size_t n)
-{
-    char *d = (char *)dst;
+void *utf8ncat(void *utf8_restrict dst, const void *utf8_restrict src, size_t n) {
+    char       *d = (char *)dst;
     const char *s = (const char *)src;
 
     // find the null terminating byte in dst
@@ -651,8 +594,7 @@ void *utf8ncat(void *utf8_restrict dst, const void *utf8_restrict src,
     return dst;
 }
 
-int utf8ncmp(const void *src1, const void *src2, size_t n)
-{
+int utf8ncmp(const void *src1, const void *src2, size_t n) {
     const unsigned char *s1 = (const unsigned char *)src1;
     const unsigned char *s2 = (const unsigned char *)src2;
 
@@ -671,12 +613,10 @@ int utf8ncmp(const void *src1, const void *src2, size_t n)
     return 0;
 }
 
-void *utf8ncpy(void *utf8_restrict dst, const void *utf8_restrict src,
-               size_t n)
-{
-    char *d = (char *)dst;
+void *utf8ncpy(void *utf8_restrict dst, const void *utf8_restrict src, size_t n) {
+    char       *d = (char *)dst;
     const char *s = (const char *)src;
-    size_t index;
+    size_t      index;
 
     // overwriting anything previously in dst, write byte-by-byte
     // from src
@@ -695,11 +635,10 @@ void *utf8ncpy(void *utf8_restrict dst, const void *utf8_restrict src,
     return dst;
 }
 
-void *utf8ndup(const void *src, size_t n)
-{
-    const char *s = (const char *)src;
-    char *c = utf8_null;
-    size_t bytes = 0;
+void *utf8ndup(const void *src, size_t n) {
+    const char *s     = (const char *)src;
+    char       *c     = utf8_null;
+    size_t      bytes = 0;
 
     // Find the end of the string or stop when n is reached
     while ('\0' != s[bytes] && bytes < n) {
@@ -729,11 +668,10 @@ void *utf8ndup(const void *src, size_t n)
     return c;
 }
 
-void *utf8rchr(const void *src, int chr)
-{
-    const char *s = (const char *)src;
+void *utf8rchr(const void *src, int chr) {
+    const char *s     = (const char *)src;
     const char *match = utf8_null;
-    char c[5] = {'\0', '\0', '\0', '\0', '\0'};
+    char        c[5]  = {'\0', '\0', '\0', '\0', '\0'};
 
     if (0 == chr) {
         // being asked to return position of null terminating byte, so
@@ -757,7 +695,7 @@ void *utf8rchr(const void *src, int chr)
         c[0] = 0xe0 | (char)(chr >> 12);
         c[1] = 0x80 | (char)((chr >> 6) & 0x3f);
         c[2] = 0x80 | (char)(chr & 0x3f);
-    } else { // if (0 == ((int)0xffe00000 & chr)) {
+    } else {  // if (0 == ((int)0xffe00000 & chr)) {
         // 4-byte/21-bit utf8 code point
         // (0b11110xxx 0b10xxxxxx 0b10xxxxxx 0b10xxxxxx)
         c[0] = 0xf0 | (char)(chr >> 18);
@@ -798,13 +736,12 @@ void *utf8rchr(const void *src, int chr)
     return (void *)match;
 }
 
-void *utf8pbrk(const void *str, const void *accept)
-{
+void *utf8pbrk(const void *str, const void *accept) {
     const char *s = (const char *)str;
 
     while ('\0' != *s) {
-        const char *a = (const char *)accept;
-        size_t offset = 0;
+        const char *a      = (const char *)accept;
+        size_t      offset = 0;
 
         while ('\0' != *a) {
             // checking that if *a is the start of a utf8 codepoint
@@ -848,10 +785,9 @@ void *utf8pbrk(const void *str, const void *accept)
     return utf8_null;
 }
 
-size_t utf8size(const void *str)
-{
-    const char *s = (const char *)str;
-    size_t size = 0;
+size_t utf8size(const void *str) {
+    const char *s    = (const char *)str;
+    size_t      size = 0;
     while ('\0' != s[size]) {
         size++;
     }
@@ -861,14 +797,13 @@ size_t utf8size(const void *str)
     return size;
 }
 
-size_t utf8spn(const void *src, const void *accept)
-{
-    const char *s = (const char *)src;
-    size_t chars = 0;
+size_t utf8spn(const void *src, const void *accept) {
+    const char *s     = (const char *)src;
+    size_t      chars = 0;
 
     while ('\0' != *s) {
-        const char *a = (const char *)accept;
-        size_t offset = 0;
+        const char *a      = (const char *)accept;
+        size_t      offset = 0;
 
         while ('\0' != *a) {
             // checking that if *r is the start of a utf8 codepoint
@@ -908,9 +843,8 @@ size_t utf8spn(const void *src, const void *accept)
     return chars;
 }
 
-void *utf8str(const void *haystack, const void *needle)
-{
-    const char *h = (const char *)haystack;
+void *utf8str(const void *haystack, const void *needle) {
+    const char  *h = (const char *)haystack;
     utf8_int32_t throwaway_codepoint;
 
     // if needle has no utf8 codepoints before the null terminating
@@ -921,7 +855,7 @@ void *utf8str(const void *haystack, const void *needle)
 
     while ('\0' != *h) {
         const char *maybeMatch = h;
-        const char *n = (const char *)needle;
+        const char *n          = (const char *)needle;
 
         while (*h == *n && (*h != '\0' && *n != '\0')) {
             n++;
@@ -944,8 +878,7 @@ void *utf8str(const void *haystack, const void *needle)
     return utf8_null;
 }
 
-void *utf8casestr(const void *haystack, const void *needle)
-{
+void *utf8casestr(const void *haystack, const void *needle) {
     const void *h = haystack;
 
     // if needle has no utf8 codepoints before the null terminating
@@ -955,13 +888,13 @@ void *utf8casestr(const void *haystack, const void *needle)
     }
 
     for (;;) {
-        const void *maybeMatch = h;
-        const void *n = needle;
+        const void  *maybeMatch = h;
+        const void  *n          = needle;
         utf8_int32_t h_cp, n_cp;
 
         // Get the next code point and track it
         const void *nextH = h = utf8codepoint(h, &h_cp);
-        n = utf8codepoint(n, &n_cp);
+        n                     = utf8codepoint(n, &n_cp);
 
         while ((0 != h_cp) && (0 != n_cp)) {
             h_cp = utf8lwrcodepoint(h_cp);
@@ -992,16 +925,14 @@ void *utf8casestr(const void *haystack, const void *needle)
     }
 }
 
-void *utf8valid(const void *str)
-{
+void *utf8valid(const void *str) {
     const char *s = (const char *)str;
 
     while ('\0' != *s) {
         if (0xf0 == (0xf8 & *s)) {
             // ensure each of the 3 following bytes in this 4-byte
             // utf8 codepoint began with 0b10xxxxxx
-            if ((0x80 != (0xc0 & s[1])) || (0x80 != (0xc0 & s[2])) ||
-                (0x80 != (0xc0 & s[3]))) {
+            if ((0x80 != (0xc0 & s[1])) || (0x80 != (0xc0 & s[2])) || (0x80 != (0xc0 & s[3]))) {
                 return (void *)s;
             }
 
@@ -1073,20 +1004,16 @@ void *utf8valid(const void *str)
     return utf8_null;
 }
 
-void *utf8codepoint(const void *utf8_restrict str,
-                    utf8_int32_t *utf8_restrict out_codepoint)
-{
+void *utf8codepoint(const void *utf8_restrict str, utf8_int32_t *utf8_restrict out_codepoint) {
     const char *s = (const char *)str;
 
     if (0xf0 == (0xf8 & s[0])) {
         // 4 byte utf8 codepoint
-        *out_codepoint = ((0x07 & s[0]) << 18) | ((0x3f & s[1]) << 12) |
-                         ((0x3f & s[2]) << 6) | (0x3f & s[3]);
+        *out_codepoint = ((0x07 & s[0]) << 18) | ((0x3f & s[1]) << 12) | ((0x3f & s[2]) << 6) | (0x3f & s[3]);
         s += 4;
     } else if (0xe0 == (0xf0 & s[0])) {
         // 3 byte utf8 codepoint
-        *out_codepoint =
-            ((0x0f & s[0]) << 12) | ((0x3f & s[1]) << 6) | (0x3f & s[2]);
+        *out_codepoint = ((0x0f & s[0]) << 12) | ((0x3f & s[1]) << 6) | (0x3f & s[2]);
         s += 3;
     } else if (0xc0 == (0xe0 & s[0])) {
         // 2 byte utf8 codepoint
@@ -1101,21 +1028,19 @@ void *utf8codepoint(const void *utf8_restrict str,
     return (void *)s;
 }
 
-size_t utf8codepointsize(utf8_int32_t chr)
-{
+size_t utf8codepointsize(utf8_int32_t chr) {
     if (0 == ((utf8_int32_t)0xffffff80 & chr)) {
         return 1;
     } else if (0 == ((utf8_int32_t)0xfffff800 & chr)) {
         return 2;
     } else if (0 == ((utf8_int32_t)0xffff0000 & chr)) {
         return 3;
-    } else { // if (0 == ((int)0xffe00000 & chr)) {
+    } else {  // if (0 == ((int)0xffe00000 & chr)) {
         return 4;
     }
 }
 
-void *utf8catcodepoint(void *utf8_restrict str, utf8_int32_t chr, size_t n)
-{
+void *utf8catcodepoint(void *utf8_restrict str, utf8_int32_t chr, size_t n) {
     char *s = (char *)str;
 
     if (0 == ((utf8_int32_t)0xffffff80 & chr)) {
@@ -1145,7 +1070,7 @@ void *utf8catcodepoint(void *utf8_restrict str, utf8_int32_t chr, size_t n)
         s[1] = 0x80 | (char)((chr >> 6) & 0x3f);
         s[2] = 0x80 | (char)(chr & 0x3f);
         s += 3;
-    } else { // if (0 == ((int)0xffe00000 & chr)) {
+    } else {  // if (0 == ((int)0xffe00000 & chr)) {
         // 4-byte/21-bit utf8 code point
         // (0b11110xxx 0b10xxxxxx 0b10xxxxxx 0b10xxxxxx)
         if (n < 4) {
@@ -1161,76 +1086,67 @@ void *utf8catcodepoint(void *utf8_restrict str, utf8_int32_t chr, size_t n)
     return s;
 }
 
-int utf8islower(utf8_int32_t chr) { return chr != utf8uprcodepoint(chr); }
+int utf8islower(utf8_int32_t chr) {
+    return chr != utf8uprcodepoint(chr);
+}
 
-int utf8isupper(utf8_int32_t chr) { return chr != utf8lwrcodepoint(chr); }
+int utf8isupper(utf8_int32_t chr) {
+    return chr != utf8lwrcodepoint(chr);
+}
 
-void utf8lwr(void *utf8_restrict str)
-{
-    void *p, *pn;
+void utf8lwr(void *utf8_restrict str) {
+    void        *p, *pn;
     utf8_int32_t cp;
 
-    p = (char *)str;
+    p  = (char *)str;
     pn = utf8codepoint(p, &cp);
 
     while (cp != 0) {
         const utf8_int32_t lwr_cp = utf8lwrcodepoint(cp);
-        const size_t size = utf8codepointsize(lwr_cp);
+        const size_t       size   = utf8codepointsize(lwr_cp);
 
         if (lwr_cp != cp) {
             utf8catcodepoint(p, lwr_cp, size);
         }
 
-        p = pn;
+        p  = pn;
         pn = utf8codepoint(p, &cp);
     }
 }
 
-void utf8upr(void *utf8_restrict str)
-{
-    void *p, *pn;
+void utf8upr(void *utf8_restrict str) {
+    void        *p, *pn;
     utf8_int32_t cp;
 
-    p = (char *)str;
+    p  = (char *)str;
     pn = utf8codepoint(p, &cp);
 
     while (cp != 0) {
         const utf8_int32_t lwr_cp = utf8uprcodepoint(cp);
-        const size_t size = utf8codepointsize(lwr_cp);
+        const size_t       size   = utf8codepointsize(lwr_cp);
 
         if (lwr_cp != cp) {
             utf8catcodepoint(p, lwr_cp, size);
         }
 
-        p = pn;
+        p  = pn;
         pn = utf8codepoint(p, &cp);
     }
 }
 
-utf8_int32_t utf8lwrcodepoint(utf8_int32_t cp)
-{
-    if (((0x0041 <= cp) && (0x005a >= cp)) ||
-        ((0x00c0 <= cp) && (0x00d6 >= cp)) ||
-        ((0x00d8 <= cp) && (0x00de >= cp)) ||
-        ((0x0391 <= cp) && (0x03a1 >= cp)) ||
-        ((0x03a3 <= cp) && (0x03ab >= cp))) {
+utf8_int32_t utf8lwrcodepoint(utf8_int32_t cp) {
+    if (((0x0041 <= cp) && (0x005a >= cp)) || ((0x00c0 <= cp) && (0x00d6 >= cp)) || ((0x00d8 <= cp) && (0x00de >= cp))
+        || ((0x0391 <= cp) && (0x03a1 >= cp)) || ((0x03a3 <= cp) && (0x03ab >= cp))) {
         cp += 32;
-    } else if (((0x0100 <= cp) && (0x012f >= cp)) ||
-               ((0x0132 <= cp) && (0x0137 >= cp)) ||
-               ((0x014a <= cp) && (0x0177 >= cp)) ||
-               ((0x0182 <= cp) && (0x0185 >= cp)) ||
-               ((0x01a0 <= cp) && (0x01a5 >= cp)) ||
-               ((0x01de <= cp) && (0x01ef >= cp)) ||
-               ((0x01f8 <= cp) && (0x021f >= cp)) ||
-               ((0x0222 <= cp) && (0x0233 >= cp)) ||
-               ((0x0246 <= cp) && (0x024f >= cp)) ||
-               ((0x03d8 <= cp) && (0x03ef >= cp))) {
+    } else if (((0x0100 <= cp) && (0x012f >= cp)) || ((0x0132 <= cp) && (0x0137 >= cp))
+               || ((0x014a <= cp) && (0x0177 >= cp)) || ((0x0182 <= cp) && (0x0185 >= cp))
+               || ((0x01a0 <= cp) && (0x01a5 >= cp)) || ((0x01de <= cp) && (0x01ef >= cp))
+               || ((0x01f8 <= cp) && (0x021f >= cp)) || ((0x0222 <= cp) && (0x0233 >= cp))
+               || ((0x0246 <= cp) && (0x024f >= cp)) || ((0x03d8 <= cp) && (0x03ef >= cp))) {
         cp |= 0x1;
-    } else if (((0x0139 <= cp) && (0x0148 >= cp)) ||
-               ((0x0179 <= cp) && (0x017e >= cp)) ||
-               ((0x01af <= cp) && (0x01b0 >= cp)) ||
-               ((0x01b3 <= cp) && (0x01b6 >= cp)) ||
-               ((0x01cd <= cp) && (0x01dc >= cp))) {
+    } else if (((0x0139 <= cp) && (0x0148 >= cp)) || ((0x0179 <= cp) && (0x017e >= cp))
+               || ((0x01af <= cp) && (0x01b0 >= cp)) || ((0x01b3 <= cp) && (0x01b6 >= cp))
+               || ((0x01cd <= cp) && (0x01dc >= cp))) {
         cp += 1;
         cp &= ~0x1;
     } else {
@@ -1284,30 +1200,19 @@ utf8_int32_t utf8lwrcodepoint(utf8_int32_t cp)
     return cp;
 }
 
-utf8_int32_t utf8uprcodepoint(utf8_int32_t cp)
-{
-    if (((0x0061 <= cp) && (0x007a >= cp)) ||
-        ((0x00e0 <= cp) && (0x00f6 >= cp)) ||
-        ((0x00f8 <= cp) && (0x00fe >= cp)) ||
-        ((0x03b1 <= cp) && (0x03c1 >= cp)) ||
-        ((0x03c3 <= cp) && (0x03cb >= cp))) {
+utf8_int32_t utf8uprcodepoint(utf8_int32_t cp) {
+    if (((0x0061 <= cp) && (0x007a >= cp)) || ((0x00e0 <= cp) && (0x00f6 >= cp)) || ((0x00f8 <= cp) && (0x00fe >= cp))
+        || ((0x03b1 <= cp) && (0x03c1 >= cp)) || ((0x03c3 <= cp) && (0x03cb >= cp))) {
         cp -= 32;
-    } else if (((0x0100 <= cp) && (0x012f >= cp)) ||
-               ((0x0132 <= cp) && (0x0137 >= cp)) ||
-               ((0x014a <= cp) && (0x0177 >= cp)) ||
-               ((0x0182 <= cp) && (0x0185 >= cp)) ||
-               ((0x01a0 <= cp) && (0x01a5 >= cp)) ||
-               ((0x01de <= cp) && (0x01ef >= cp)) ||
-               ((0x01f8 <= cp) && (0x021f >= cp)) ||
-               ((0x0222 <= cp) && (0x0233 >= cp)) ||
-               ((0x0246 <= cp) && (0x024f >= cp)) ||
-               ((0x03d8 <= cp) && (0x03ef >= cp))) {
+    } else if (((0x0100 <= cp) && (0x012f >= cp)) || ((0x0132 <= cp) && (0x0137 >= cp))
+               || ((0x014a <= cp) && (0x0177 >= cp)) || ((0x0182 <= cp) && (0x0185 >= cp))
+               || ((0x01a0 <= cp) && (0x01a5 >= cp)) || ((0x01de <= cp) && (0x01ef >= cp))
+               || ((0x01f8 <= cp) && (0x021f >= cp)) || ((0x0222 <= cp) && (0x0233 >= cp))
+               || ((0x0246 <= cp) && (0x024f >= cp)) || ((0x03d8 <= cp) && (0x03ef >= cp))) {
         cp &= ~0x1;
-    } else if (((0x0139 <= cp) && (0x0148 >= cp)) ||
-               ((0x0179 <= cp) && (0x017e >= cp)) ||
-               ((0x01af <= cp) && (0x01b0 >= cp)) ||
-               ((0x01b3 <= cp) && (0x01b6 >= cp)) ||
-               ((0x01cd <= cp) && (0x01dc >= cp))) {
+    } else if (((0x0139 <= cp) && (0x0148 >= cp)) || ((0x0179 <= cp) && (0x017e >= cp))
+               || ((0x01af <= cp) && (0x01b0 >= cp)) || ((0x01b3 <= cp) && (0x01b6 >= cp))
+               || ((0x01cd <= cp) && (0x01dc >= cp))) {
         cp -= 1;
         cp |= 0x1;
     } else {
@@ -1365,12 +1270,11 @@ utf8_int32_t utf8uprcodepoint(utf8_int32_t cp)
 #undef utf8_null
 
 #ifdef __cplusplus
-} // extern "C"
+}  // extern "C"
 #endif
 
 #if defined(__clang__)
 #pragma clang diagnostic pop
 #endif
 
-#endif // SHEREDOM_UTF8_H_INCLUDED
-
+#endif  // SHEREDOM_UTF8_H_INCLUDED

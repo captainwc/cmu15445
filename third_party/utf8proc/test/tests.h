@@ -11,17 +11,17 @@
 /* silence warnings about sscanf on Windows */
 #define _CRT_SECURE_NO_WARNINGS
 
+#include <ctype.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <string.h>
-#include <stdarg.h>
 
 #include "../utf8proc.h"
 
 extern size_t lineno;
 
-void check(int cond, const char *format, ...);
+void   check(int cond, const char *format, ...);
 size_t skipspaces(const unsigned char *buf, size_t i);
 size_t encode(unsigned char *dest, const unsigned char *buf);
 size_t simple_getline(unsigned char buf[8192], FILE *f);

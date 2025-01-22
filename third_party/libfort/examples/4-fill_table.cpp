@@ -3,17 +3,15 @@
 
 #include "fort.hpp"
 
-int main(void)
-{
+int main(void) {
     fort::char_table table;
     table << fort::header;
     /* Fill each cell with operator[] */
-    table [0][0] = "N";
-    table [0][1] = "Planet";
-    table [0][2] = "Speed, km/s";
-    table [0][3] = "Temperature, K";
+    table[0][0] = "N";
+    table[0][1] = "Planet";
+    table[0][2] = "Speed, km/s";
+    table[0][3] = "Temperature, K";
     table << fort::endr;
-
 
     /* Fill with iostream operator<< */
     table << 1 << "Mercury" << 47.362 << 340 << fort::endr;

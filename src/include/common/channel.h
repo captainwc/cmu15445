@@ -24,36 +24,36 @@ namespace bustub {
  */
 template <class T>
 class Channel {
- public:
-  Channel() = default;
-  ~Channel() = default;
+public:
+    Channel()  = default;
+    ~Channel() = default;
 
-  /**
-   * @brief Inserts an element into a shared queue.
-   *
-   * @param element The element to be inserted.
-   */
-  void Put(T element) {
-    std::unique_lock<std::mutex> lk(m_);
-    q_.push(std::move(element));
-    lk.unlock();
-    cv_.notify_all();
-  }
+    /**
+     * @brief Inserts an element into a shared queue.
+     *
+     * @param element The element to be inserted.
+     */
+    void Put(T element) {
+        std::unique_lock<std::mutex> lk(m_);
+        q_.push(std::move(element));
+        lk.unlock();
+        cv_.notify_all();
+    }
 
-  /**
-   * @brief Gets an element from the shared queue. If the queue is empty, blocks until an element is available.
-   */
-  auto Get() -> T {
-    std::unique_lock<std::mutex> lk(m_);
-    cv_.wait(lk, [&]() { return !q_.empty(); });
-    T element = std::move(q_.front());
-    q_.pop();
-    return element;
-  }
+    /**
+     * @brief Gets an element from the shared queue. If the queue is empty, blocks until an element is available.
+     */
+    auto Get() -> T {
+        std::unique_lock<std::mutex> lk(m_);
+        cv_.wait(lk, [&]() { return !q_.empty(); });
+        T element = std::move(q_.front());
+        q_.pop();
+        return element;
+    }
 
- private:
-  std::mutex m_;
-  std::condition_variable cv_;
-  std::queue<T> q_;
+private:
+    std::mutex              m_;
+    std::condition_variable cv_;
+    std::queue<T>           q_;
 };
 }  // namespace bustub

@@ -3,7 +3,6 @@
 
 #include "fort_utils.h"
 
-
 /*****************************************************************************
  *               STRING BUFFER
  * ***************************************************************************/
@@ -19,7 +18,8 @@ struct f_string_buffer {
 #endif
         void *data;
     } str;
-    size_t data_sz;
+
+    size_t             data_sz;
     enum f_string_type type;
 };
 
@@ -77,6 +77,5 @@ int buffer_printf(f_string_buffer_t *buffer, size_t buffer_row, f_conv_context_t
 FT_INTERNAL
 void buffer_set_u8strwid_func(int (*u8strwid)(const void *beg, const void *end, size_t *width));
 #endif /* FT_HAVE_UTF8 */
-
 
 #endif /* STRING_BUFFER_H */

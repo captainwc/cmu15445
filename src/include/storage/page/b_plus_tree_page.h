@@ -39,30 +39,30 @@ enum class IndexPageType { INVALID_INDEX_PAGE = 0, LEAF_PAGE, INTERNAL_PAGE };
  * ---------------------------------------------------------
  */
 class BPlusTreePage {
- public:
-  // Delete all constructor / destructor to ensure memory safety
-  BPlusTreePage() = delete;
-  BPlusTreePage(const BPlusTreePage &other) = delete;
-  ~BPlusTreePage() = delete;
+public:
+    // Delete all constructor / destructor to ensure memory safety
+    BPlusTreePage()                           = delete;
+    BPlusTreePage(const BPlusTreePage &other) = delete;
+    ~BPlusTreePage()                          = delete;
 
-  auto IsLeafPage() const -> bool;
-  void SetPageType(IndexPageType page_type);
+    auto IsLeafPage() const -> bool;
+    void SetPageType(IndexPageType page_type);
 
-  auto GetSize() const -> int;
-  void SetSize(int size);
-  void ChangeSizeBy(int amount);
+    auto GetSize() const -> int;
+    void SetSize(int size);
+    void ChangeSizeBy(int amount);
 
-  auto GetMaxSize() const -> int;
-  void SetMaxSize(int max_size);
-  auto GetMinSize() const -> int;
+    auto GetMaxSize() const -> int;
+    void SetMaxSize(int max_size);
+    auto GetMinSize() const -> int;
 
- private:
-  // Member variables, attributes that both internal and leaf page share
-  IndexPageType page_type_ __attribute__((__unused__));
-  // Number of key & value pairs in a page
-  int size_ __attribute__((__unused__));
-  // Max number of key & value pairs in a page
-  int max_size_ __attribute__((__unused__));
+private:
+    // Member variables, attributes that both internal and leaf page share
+    IndexPageType page_type_ __attribute__((__unused__));
+    // Number of key & value pairs in a page
+    int size_ __attribute__((__unused__));
+    // Max number of key & value pairs in a page
+    int max_size_ __attribute__((__unused__));
 };
 
 }  // namespace bustub

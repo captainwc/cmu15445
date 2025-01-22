@@ -29,7 +29,7 @@ namespace bustub {
 ReadPageGuard::ReadPageGuard(page_id_t page_id, std::shared_ptr<FrameHeader> frame,
                              std::shared_ptr<LRUKReplacer> replacer, std::shared_ptr<std::mutex> bpm_latch)
     : page_id_(page_id), frame_(std::move(frame)), replacer_(std::move(replacer)), bpm_latch_(std::move(bpm_latch)) {
-  UNIMPLEMENTED("TODO(P1): Add implementation.");
+    UNIMPLEMENTED("TODO(P1): Add implementation.");
 }
 
 /**
@@ -66,30 +66,32 @@ ReadPageGuard::ReadPageGuard(ReadPageGuard &&that) noexcept {}
  * @param that The other page guard.
  * @return ReadPageGuard& The newly valid `ReadPageGuard`.
  */
-auto ReadPageGuard::operator=(ReadPageGuard &&that) noexcept -> ReadPageGuard & { return *this; }
+auto ReadPageGuard::operator=(ReadPageGuard &&that) noexcept -> ReadPageGuard & {
+    return *this;
+}
 
 /**
  * @brief Gets the page ID of the page this guard is protecting.
  */
 auto ReadPageGuard::GetPageId() const -> page_id_t {
-  BUSTUB_ENSURE(is_valid_, "tried to use an invalid read guard");
-  return page_id_;
+    BUSTUB_ENSURE(is_valid_, "tried to use an invalid read guard");
+    return page_id_;
 }
 
 /**
  * @brief Gets a `const` pointer to the page of data this guard is protecting.
  */
 auto ReadPageGuard::GetData() const -> const char * {
-  BUSTUB_ENSURE(is_valid_, "tried to use an invalid read guard");
-  return frame_->GetData();
+    BUSTUB_ENSURE(is_valid_, "tried to use an invalid read guard");
+    return frame_->GetData();
 }
 
 /**
  * @brief Returns whether the page is dirty (modified but not flushed to the disk).
  */
 auto ReadPageGuard::IsDirty() const -> bool {
-  BUSTUB_ENSURE(is_valid_, "tried to use an invalid read guard");
-  return frame_->is_dirty_;
+    BUSTUB_ENSURE(is_valid_, "tried to use an invalid read guard");
+    return frame_->is_dirty_;
 }
 
 /**
@@ -103,10 +105,14 @@ auto ReadPageGuard::IsDirty() const -> bool {
  *
  * TODO(P1): Add implementation.
  */
-void ReadPageGuard::Drop() { UNIMPLEMENTED("TODO(P1): Add implementation."); }
+void ReadPageGuard::Drop() {
+    UNIMPLEMENTED("TODO(P1): Add implementation.");
+}
 
 /** @brief The destructor for `ReadPageGuard`. This destructor simply calls `Drop()`. */
-ReadPageGuard::~ReadPageGuard() { Drop(); }
+ReadPageGuard::~ReadPageGuard() {
+    Drop();
+}
 
 /**********************************************************************************************************************/
 /**********************************************************************************************************************/
@@ -127,7 +133,7 @@ ReadPageGuard::~ReadPageGuard() { Drop(); }
 WritePageGuard::WritePageGuard(page_id_t page_id, std::shared_ptr<FrameHeader> frame,
                                std::shared_ptr<LRUKReplacer> replacer, std::shared_ptr<std::mutex> bpm_latch)
     : page_id_(page_id), frame_(std::move(frame)), replacer_(std::move(replacer)), bpm_latch_(std::move(bpm_latch)) {
-  UNIMPLEMENTED("TODO(P1): Add implementation.");
+    UNIMPLEMENTED("TODO(P1): Add implementation.");
 }
 
 /**
@@ -164,38 +170,40 @@ WritePageGuard::WritePageGuard(WritePageGuard &&that) noexcept {}
  * @param that The other page guard.
  * @return WritePageGuard& The newly valid `WritePageGuard`.
  */
-auto WritePageGuard::operator=(WritePageGuard &&that) noexcept -> WritePageGuard & { return *this; }
+auto WritePageGuard::operator=(WritePageGuard &&that) noexcept -> WritePageGuard & {
+    return *this;
+}
 
 /**
  * @brief Gets the page ID of the page this guard is protecting.
  */
 auto WritePageGuard::GetPageId() const -> page_id_t {
-  BUSTUB_ENSURE(is_valid_, "tried to use an invalid write guard");
-  return page_id_;
+    BUSTUB_ENSURE(is_valid_, "tried to use an invalid write guard");
+    return page_id_;
 }
 
 /**
  * @brief Gets a `const` pointer to the page of data this guard is protecting.
  */
 auto WritePageGuard::GetData() const -> const char * {
-  BUSTUB_ENSURE(is_valid_, "tried to use an invalid write guard");
-  return frame_->GetData();
+    BUSTUB_ENSURE(is_valid_, "tried to use an invalid write guard");
+    return frame_->GetData();
 }
 
 /**
  * @brief Gets a mutable pointer to the page of data this guard is protecting.
  */
 auto WritePageGuard::GetDataMut() -> char * {
-  BUSTUB_ENSURE(is_valid_, "tried to use an invalid write guard");
-  return frame_->GetDataMut();
+    BUSTUB_ENSURE(is_valid_, "tried to use an invalid write guard");
+    return frame_->GetDataMut();
 }
 
 /**
  * @brief Returns whether the page is dirty (modified but not flushed to the disk).
  */
 auto WritePageGuard::IsDirty() const -> bool {
-  BUSTUB_ENSURE(is_valid_, "tried to use an invalid write guard");
-  return frame_->is_dirty_;
+    BUSTUB_ENSURE(is_valid_, "tried to use an invalid write guard");
+    return frame_->is_dirty_;
 }
 
 /**
@@ -209,9 +217,13 @@ auto WritePageGuard::IsDirty() const -> bool {
  *
  * TODO(P1): Add implementation.
  */
-void WritePageGuard::Drop() { UNIMPLEMENTED("TODO(P1): Add implementation."); }
+void WritePageGuard::Drop() {
+    UNIMPLEMENTED("TODO(P1): Add implementation.");
+}
 
 /** @brief The destructor for `WritePageGuard`. This destructor simply calls `Drop()`. */
-WritePageGuard::~WritePageGuard() { Drop(); }
+WritePageGuard::~WritePageGuard() {
+    Drop();
+}
 
 }  // namespace bustub

@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <memory>
+
 #include "catalog/column.h"
 #include "catalog/schema.h"
 #include "common/exception.h"
@@ -18,10 +19,10 @@
 namespace bustub {
 
 auto Optimizer::OptimizeNLJAsHashJoin(const AbstractPlanNodeRef &plan) -> AbstractPlanNodeRef {
-  // TODO(student): implement NestedLoopJoin -> HashJoin optimizer rule
-  // Note for 2023 Fall: You should support join keys of any number of conjunction of equi-conditions:
-  // E.g. <column expr> = <column expr> AND <column expr> = <column expr> AND ...
-  return plan;
+    // TODO(student): implement NestedLoopJoin -> HashJoin optimizer rule
+    // Note for 2023 Fall: You should support join keys of any number of conjunction of equi-conditions:
+    // E.g. <column expr> = <column expr> AND <column expr> = <column expr> AND ...
+    return plan;
 }
 
 }  // namespace bustub

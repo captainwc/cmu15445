@@ -14,6 +14,7 @@
  */
 #pragma once
 #include <utility>
+
 #include "storage/page/b_plus_tree_leaf_page.h"
 
 namespace bustub {
@@ -21,24 +22,25 @@ namespace bustub {
 #define INDEXITERATOR_TYPE IndexIterator<KeyType, ValueType, KeyComparator>
 
 INDEX_TEMPLATE_ARGUMENTS
+
 class IndexIterator {
- public:
-  // you may define your own constructor based on your member variables
-  IndexIterator();
-  ~IndexIterator();  // NOLINT
+public:
+    // you may define your own constructor based on your member variables
+    IndexIterator();
+    ~IndexIterator();  // NOLINT
 
-  auto IsEnd() -> bool;
+    auto IsEnd() -> bool;
 
-  auto operator*() -> std::pair<const KeyType &, const ValueType &>;
+    auto operator*() -> std::pair<const KeyType &, const ValueType &>;
 
-  auto operator++() -> IndexIterator &;
+    auto operator++() -> IndexIterator &;
 
-  auto operator==(const IndexIterator &itr) const -> bool { throw std::runtime_error("unimplemented"); }
+    auto operator==(const IndexIterator &itr) const -> bool { throw std::runtime_error("unimplemented"); }
 
-  auto operator!=(const IndexIterator &itr) const -> bool { throw std::runtime_error("unimplemented"); }
+    auto operator!=(const IndexIterator &itr) const -> bool { throw std::runtime_error("unimplemented"); }
 
- private:
-  // add your own private member variables here
+private:
+    // add your own private member variables here
 };
 
 }  // namespace bustub

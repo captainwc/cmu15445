@@ -7,12 +7,12 @@ HyperLogLogPresto<KeyType>::HyperLogLogPresto(int16_t n_leading_bits) : cardinal
 
 template <typename KeyType>
 auto HyperLogLogPresto<KeyType>::AddElem(KeyType val) -> void {
-  /** @TODO(student) Implement this function! */
+    /** @TODO(student) Implement this function! */
 }
 
 template <typename T>
 auto HyperLogLogPresto<T>::ComputeCardinality() -> void {
-  /** @TODO(student) Implement this function! */
+    /** @TODO(student) Implement this function! */
 }
 
 template class HyperLogLogPresto<int64_t>;

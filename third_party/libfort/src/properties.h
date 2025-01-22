@@ -1,55 +1,53 @@
 #ifndef PROPERTIES_H
 #define PROPERTIES_H
 
-#include "fort_utils.h"
-#include <stdint.h>
 #include <limits.h>
+#include <stdint.h>
+
+#include "fort_utils.h"
 
 #define PROP_IS_SET(ft_props, property) ((ft_props) & (property))
-#define PROP_SET(ft_props, property) ((ft_props) |=(property))
-#define PROP_UNSET(ft_props, property) ((ft_props) &= ~((uint32_t)(property)))
+#define PROP_SET(ft_props, property)    ((ft_props) |= (property))
+#define PROP_UNSET(ft_props, property)  ((ft_props) &= ~((uint32_t)(property)))
 
 #define TEXT_STYLE_TAG_MAX_SIZE (64 * 2)
 
 FT_INTERNAL
-void get_style_tag_for_cell(const f_table_properties_t *props,
-                            size_t row, size_t col, char *style_tag, size_t sz);
+void get_style_tag_for_cell(const f_table_properties_t *props, size_t row, size_t col, char *style_tag, size_t sz);
 
 FT_INTERNAL
-void get_reset_style_tag_for_cell(const f_table_properties_t *props,
-                                  size_t row, size_t col, char *style_tag, size_t sz);
+void get_reset_style_tag_for_cell(const f_table_properties_t *props, size_t row, size_t col, char *style_tag,
+                                  size_t sz);
 
 FT_INTERNAL
-void get_style_tag_for_content(const f_table_properties_t *props,
-                               size_t row, size_t col, char *style_tag, size_t sz);
+void get_style_tag_for_content(const f_table_properties_t *props, size_t row, size_t col, char *style_tag, size_t sz);
 
 FT_INTERNAL
-void get_reset_style_tag_for_content(const f_table_properties_t *props,
-                                     size_t row, size_t col, char *style_tag, size_t sz);
-
+void get_reset_style_tag_for_content(const f_table_properties_t *props, size_t row, size_t col, char *style_tag,
+                                     size_t sz);
 
 struct f_cell_props {
-    size_t cell_row;
-    size_t cell_col;
+    size_t   cell_row;
+    size_t   cell_col;
     uint32_t properties_flags;
 
-    unsigned int col_min_width;
+    unsigned int           col_min_width;
     enum ft_text_alignment align;
-    unsigned int cell_padding_top;
-    unsigned int cell_padding_bottom;
-    unsigned int cell_padding_left;
-    unsigned int cell_padding_right;
-    unsigned int cell_empty_string_height;
-    enum ft_row_type row_type;
-    unsigned int content_fg_color_number;
-    unsigned int content_bg_color_number;
-    unsigned int cell_bg_color_number;
-    enum ft_text_style cell_text_style;
-    enum ft_text_style content_text_style;
+    unsigned int           cell_padding_top;
+    unsigned int           cell_padding_bottom;
+    unsigned int           cell_padding_left;
+    unsigned int           cell_padding_right;
+    unsigned int           cell_empty_string_height;
+    enum ft_row_type       row_type;
+    unsigned int           content_fg_color_number;
+    unsigned int           content_bg_color_number;
+    unsigned int           cell_bg_color_number;
+    enum ft_text_style     cell_text_style;
+    enum ft_text_style     content_text_style;
 };
 
 typedef struct f_cell_props f_cell_props_t;
-typedef f_vector_t f_cell_prop_container_t;
+typedef f_vector_t          f_cell_prop_container_t;
 
 FT_INTERNAL
 f_cell_prop_container_t *create_cell_prop_container(void);
@@ -67,11 +65,11 @@ FT_INTERNAL
 f_status set_cell_property(f_cell_prop_container_t *cont, size_t row, size_t col, uint32_t property, int value);
 
 FT_INTERNAL
-int get_cell_property_hierarchically(const f_table_properties_t *properties, size_t row, size_t column, uint32_t property);
+int get_cell_property_hierarchically(const f_table_properties_t *properties, size_t row, size_t column,
+                                     uint32_t property);
 
 FT_INTERNAL
 f_status set_default_cell_property(uint32_t property, int value);
-
 
 /*         TABLE BORDER DESСRIPTION
  *
@@ -91,7 +89,6 @@ f_status set_default_cell_property(uint32_t property, int value);
  *   BL BB BB BB BV BB BB BB BV BB BB BB BR
  */
 
-
 /*      HORIZONTAL SEPARATOR DESCRIPTION
  *
  *
@@ -102,11 +99,7 @@ f_status set_default_cell_property(uint32_t property, int value);
  *   BL BB BB BB BV BB BB BB BV BB BB BB BR        <----- BOTTOM_SEPARATOR
  */
 
-enum f_hor_separator_pos {
-    TOP_SEPARATOR,
-    INSIDE_SEPARATOR,
-    BOTTOM_SEPARATOR
-};
+enum f_hor_separator_pos { TOP_SEPARATOR, INSIDE_SEPARATOR, BOTTOM_SEPARATOR };
 
 enum f_border_item_pos {
     TL_bip = 0,
@@ -136,7 +129,6 @@ enum f_border_item_pos {
     BORDER_ITEM_POS_SIZE
 };
 
-
 enum f_separator_item_pos {
     LH_sip = 0,
     IH_sip = 1,
@@ -148,7 +140,6 @@ enum f_separator_item_pos {
 
     SEPARATOR_ITEM_POS_SIZE
 };
-
 
 struct fort_border_style {
     const char *border_chars[BORDER_ITEM_POS_SIZE];
@@ -171,16 +162,15 @@ extern struct fort_border_style FORT_BOLD_STYLE;
 extern struct fort_border_style FORT_BOLD2_STYLE;
 extern struct fort_border_style FORT_FRAME_STYLE;
 
-
 struct fort_entire_table_properties {
-    unsigned int left_margin;
-    unsigned int top_margin;
-    unsigned int right_margin;
-    unsigned int bottom_margin;
+    unsigned int            left_margin;
+    unsigned int            top_margin;
+    unsigned int            right_margin;
+    unsigned int            bottom_margin;
     enum ft_adding_strategy add_strategy;
 };
 typedef struct fort_entire_table_properties fort_entire_table_properties_t;
-extern fort_entire_table_properties_t g_entire_table_properties;
+extern fort_entire_table_properties_t       g_entire_table_properties;
 
 FT_INTERNAL
 f_status set_entire_table_property(f_table_properties_t *table_properties, uint32_t property, int value);
@@ -189,10 +179,11 @@ FT_INTERNAL
 f_status set_default_entire_table_property(uint32_t property, int value);
 
 struct f_table_properties {
-    struct fort_border_style border_style;
-    f_cell_prop_container_t *cell_properties;
+    struct fort_border_style       border_style;
+    f_cell_prop_container_t       *cell_properties;
     fort_entire_table_properties_t entire_table_properties;
 };
+
 extern f_table_properties_t g_table_properties;
 
 FT_INTERNAL

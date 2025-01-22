@@ -18,8 +18,12 @@ LimitExecutor::LimitExecutor(ExecutorContext *exec_ctx, const LimitPlanNode *pla
                              std::unique_ptr<AbstractExecutor> &&child_executor)
     : AbstractExecutor(exec_ctx) {}
 
-void LimitExecutor::Init() { throw NotImplementedException("LimitExecutor is not implemented"); }
+void LimitExecutor::Init() {
+    throw NotImplementedException("LimitExecutor is not implemented");
+}
 
-auto LimitExecutor::Next(Tuple *tuple, RID *rid) -> bool { return false; }
+auto LimitExecutor::Next(Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 }  // namespace bustub

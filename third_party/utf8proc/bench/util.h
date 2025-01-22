@@ -12,8 +12,8 @@ extern "C" {
 uint8_t *readfile(const char *filename, size_t *len);
 
 typedef struct timeval mytime;
-mytime gettime(void);
-double elapsed(mytime t1, mytime t0);
+mytime                 gettime(void);
+double                 elapsed(mytime t1, mytime t0);
 
 #ifdef __cplusplus
 }

@@ -1,31 +1,28 @@
-#include "tests.h"
 #include "fort.hpp"
 #include "test_utils.hpp"
+#include "tests.h"
 
-
-void test_cpp_table_tbl_properties(void)
-{
+void test_cpp_table_tbl_properties(void) {
     fort::char_table table;
     WHEN("Test setting entire table properties") {
         set_test_properties_as_default();
 
         table = create_cpp_test_int_table(false);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n";
         assert_string_equal(table_str, table_str_etalon);
 
         /* Now set table properties */
@@ -34,57 +31,53 @@ void test_cpp_table_tbl_properties(void)
         table.set_left_margin(1);
         table.set_right_margin(2);
 
-        table_str = table.to_string();
-        table_str_etalon =
-            "                      \n"
-            "                      \n"
-            "                      \n"
-            " +---+---+----+----+  \n"
-            " |   |   |    |    |  \n"
-            " | 3 | 4 | 55 | 67 |  \n"
-            " |   |   |    |    |  \n"
-            " +---+---+----+----+  \n"
-            " |   |   |    |    |  \n"
-            " | 3 | 4 | 55 | 67 |  \n"
-            " |   |   |    |    |  \n"
-            " +---+---+----+----+  \n"
-            " |   |   |    |    |  \n"
-            " | 3 | 4 | 55 | 67 |  \n"
-            " |   |   |    |    |  \n"
-            " +---+---+----+----+  \n"
-            "                      \n"
-            "                      \n"
-            "                      \n"
-            "                      \n";
+        table_str        = table.to_string();
+        table_str_etalon = "                      \n"
+                           "                      \n"
+                           "                      \n"
+                           " +---+---+----+----+  \n"
+                           " |   |   |    |    |  \n"
+                           " | 3 | 4 | 55 | 67 |  \n"
+                           " |   |   |    |    |  \n"
+                           " +---+---+----+----+  \n"
+                           " |   |   |    |    |  \n"
+                           " | 3 | 4 | 55 | 67 |  \n"
+                           " |   |   |    |    |  \n"
+                           " +---+---+----+----+  \n"
+                           " |   |   |    |    |  \n"
+                           " | 3 | 4 | 55 | 67 |  \n"
+                           " |   |   |    |    |  \n"
+                           " +---+---+----+----+  \n"
+                           "                      \n"
+                           "                      \n"
+                           "                      \n"
+                           "                      \n";
         assert_string_equal(table_str, table_str_etalon);
     }
 }
 
-void test_cpp_table_cell_properties(void)
-{
-
+void test_cpp_table_cell_properties(void) {
     WHEN("Setting property for one cell") {
         set_test_properties_as_default();
 
         fort::char_table table = create_cpp_test_int_table(false);
         table[1][1].set_cell_top_padding(2);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 |   | 55 | 67 |\n"
-            "|   | 4 |    |    |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 |   | 55 | 67 |\n"
+                                       "|   | 4 |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -94,22 +87,21 @@ void test_cpp_table_cell_properties(void)
         fort::char_table table = create_cpp_test_int_table(false);
         table.cell(1, 1).set_cell_top_padding(2);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 |   | 55 | 67 |\n"
-            "|   | 4 |    |    |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 |   | 55 | 67 |\n"
+                                       "|   | 4 |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -119,22 +111,21 @@ void test_cpp_table_cell_properties(void)
         fort::char_table table = create_cpp_test_int_table(false);
         table[1].set_cell_top_padding(2);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -144,24 +135,23 @@ void test_cpp_table_cell_properties(void)
         fort::char_table table = create_cpp_test_int_table(false);
         table.column(1).set_cell_top_padding(2);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 |   | 55 | 67 |\n"
-            "|   | 4 |    |    |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 |   | 55 | 67 |\n"
-            "|   | 4 |    |    |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 |   | 55 | 67 |\n"
-            "|   | 4 |    |    |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 |   | 55 | 67 |\n"
+                                       "|   | 4 |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 |   | 55 | 67 |\n"
+                                       "|   | 4 |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 |   | 55 | 67 |\n"
+                                       "|   | 4 |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -171,24 +161,23 @@ void test_cpp_table_cell_properties(void)
         fort::char_table table = create_cpp_test_int_table(false);
         table.set_cell_top_padding(2);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -202,30 +191,29 @@ void test_cpp_table_cell_properties(void)
 
         fort::char_table table = create_cpp_test_int_table(false);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+--+--+---+---+\n"
-            "|  |  |   |   |\n"
-            "|  |  |   |   |\n"
-            "| 3| 4| 55| 67|\n"
-            "|  |  |   |   |\n"
-            "|  |  |   |   |\n"
-            "|  |  |   |   |\n"
-            "+--+--+---+---+\n"
-            "|  |  |   |   |\n"
-            "|  |  |   |   |\n"
-            "| 3| 4| 55| 67|\n"
-            "|  |  |   |   |\n"
-            "|  |  |   |   |\n"
-            "|  |  |   |   |\n"
-            "+--+--+---+---+\n"
-            "|  |  |   |   |\n"
-            "|  |  |   |   |\n"
-            "| 3| 4| 55| 67|\n"
-            "|  |  |   |   |\n"
-            "|  |  |   |   |\n"
-            "|  |  |   |   |\n"
-            "+--+--+---+---+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+--+--+---+---+\n"
+                                       "|  |  |   |   |\n"
+                                       "|  |  |   |   |\n"
+                                       "| 3| 4| 55| 67|\n"
+                                       "|  |  |   |   |\n"
+                                       "|  |  |   |   |\n"
+                                       "|  |  |   |   |\n"
+                                       "+--+--+---+---+\n"
+                                       "|  |  |   |   |\n"
+                                       "|  |  |   |   |\n"
+                                       "| 3| 4| 55| 67|\n"
+                                       "|  |  |   |   |\n"
+                                       "|  |  |   |   |\n"
+                                       "|  |  |   |   |\n"
+                                       "+--+--+---+---+\n"
+                                       "|  |  |   |   |\n"
+                                       "|  |  |   |   |\n"
+                                       "| 3| 4| 55| 67|\n"
+                                       "|  |  |   |   |\n"
+                                       "|  |  |   |   |\n"
+                                       "|  |  |   |   |\n"
+                                       "+--+--+---+---+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -237,15 +225,14 @@ void test_cpp_table_cell_properties(void)
 
         fort::char_table table = create_cpp_test_int_table(false);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+---+----+----+\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "+---+---+----+----+\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "+---+---+----+----+\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "+---+---+----+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+---+----+----+\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "+---+---+----+----+\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "+---+---+----+----+\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "+---+---+----+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -257,21 +244,20 @@ void test_cpp_table_cell_properties(void)
 
         fort::char_table table = create_cpp_test_int_table(false);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+-+-+--+--+\n"
-            "| | |  |  |\n"
-            "|3|4|55|67|\n"
-            "| | |  |  |\n"
-            "+-+-+--+--+\n"
-            "| | |  |  |\n"
-            "|3|4|55|67|\n"
-            "| | |  |  |\n"
-            "+-+-+--+--+\n"
-            "| | |  |  |\n"
-            "|3|4|55|67|\n"
-            "| | |  |  |\n"
-            "+-+-+--+--+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+-+-+--+--+\n"
+                                       "| | |  |  |\n"
+                                       "|3|4|55|67|\n"
+                                       "| | |  |  |\n"
+                                       "+-+-+--+--+\n"
+                                       "| | |  |  |\n"
+                                       "|3|4|55|67|\n"
+                                       "| | |  |  |\n"
+                                       "+-+-+--+--+\n"
+                                       "| | |  |  |\n"
+                                       "|3|4|55|67|\n"
+                                       "| | |  |  |\n"
+                                       "+-+-+--+--+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -283,15 +269,14 @@ void test_cpp_table_cell_properties(void)
 
         fort::char_table table = create_cpp_test_int_table(false);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+-+-+--+--+\n"
-            "|3|4|55|67|\n"
-            "+-+-+--+--+\n"
-            "|3|4|55|67|\n"
-            "+-+-+--+--+\n"
-            "|3|4|55|67|\n"
-            "+-+-+--+--+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+-+-+--+--+\n"
+                                       "|3|4|55|67|\n"
+                                       "+-+-+--+--+\n"
+                                       "|3|4|55|67|\n"
+                                       "+-+-+--+--+\n"
+                                       "|3|4|55|67|\n"
+                                       "+-+-+--+--+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -305,24 +290,23 @@ void test_cpp_table_cell_properties(void)
         fort::char_table table = create_cpp_test_int_table(false);
         table << "";
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "| 3 | 4 | 55 | 67 |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n"
-            "|   |   |    |    |\n"
-            "|   |   |    |    |\n"
-            "+---+---+----+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "| 3 | 4 | 55 | 67 |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n"
+                                       "|   |   |    |    |\n"
+                                       "|   |   |    |    |\n"
+                                       "+---+---+----+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -334,15 +318,14 @@ void test_cpp_table_cell_properties(void)
         table.set_cell_left_padding(0);
         table.set_cell_right_padding(0);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+-+-+--+--+\n"
-            "|3|4|55|67|\n"
-            "+-+-+--+--+\n"
-            "|3|4|55|67|\n"
-            "+-+-+--+--+\n"
-            "|3|4|55|67|\n"
-            "+-+-+--+--+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+-+-+--+--+\n"
+                                       "|3|4|55|67|\n"
+                                       "+-+-+--+--+\n"
+                                       "|3|4|55|67|\n"
+                                       "+-+-+--+--+\n"
+                                       "|3|4|55|67|\n"
+                                       "+-+-+--+--+\n";
         assert_string_equal(table_str, table_str_etalon);
 
         table.set_cell_bottom_padding(1);
@@ -351,21 +334,20 @@ void test_cpp_table_cell_properties(void)
         table.set_cell_right_padding(0);
         table.set_cell_empty_str_height(0);
 
-        table_str = table.to_string();
-        table_str_etalon =
-            "+-+-+--+--+\n"
-            "| | |  |  |\n"
-            "|3|4|55|67|\n"
-            "| | |  |  |\n"
-            "+-+-+--+--+\n"
-            "| | |  |  |\n"
-            "|3|4|55|67|\n"
-            "| | |  |  |\n"
-            "+-+-+--+--+\n"
-            "| | |  |  |\n"
-            "|3|4|55|67|\n"
-            "| | |  |  |\n"
-            "+-+-+--+--+\n";
+        table_str        = table.to_string();
+        table_str_etalon = "+-+-+--+--+\n"
+                           "| | |  |  |\n"
+                           "|3|4|55|67|\n"
+                           "| | |  |  |\n"
+                           "+-+-+--+--+\n"
+                           "| | |  |  |\n"
+                           "|3|4|55|67|\n"
+                           "| | |  |  |\n"
+                           "+-+-+--+--+\n"
+                           "| | |  |  |\n"
+                           "|3|4|55|67|\n"
+                           "| | |  |  |\n"
+                           "+-+-+--+--+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -381,21 +363,20 @@ void test_cpp_table_cell_properties(void)
         table[2][3].set_cell_min_width(6);
         table[2][3].set_cell_text_align(fort::text_align::left);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+-------+--------+------+\n"
-            "|   |       |        |      |\n"
-            "| 3 | 4     |   55   |   67 |\n"
-            "|   |       |        |      |\n"
-            "+---+-------+--------+------+\n"
-            "|   |       |        |      |\n"
-            "| 3 | 4     |   55   |   67 |\n"
-            "|   |       |        |      |\n"
-            "+---+-------+--------+------+\n"
-            "|   |       |        |      |\n"
-            "| 3 | 4     |   55   | 67   |\n"
-            "|   |       |        |      |\n"
-            "+---+-------+--------+------+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+-------+--------+------+\n"
+                                       "|   |       |        |      |\n"
+                                       "| 3 | 4     |   55   |   67 |\n"
+                                       "|   |       |        |      |\n"
+                                       "+---+-------+--------+------+\n"
+                                       "|   |       |        |      |\n"
+                                       "| 3 | 4     |   55   |   67 |\n"
+                                       "|   |       |        |      |\n"
+                                       "+---+-------+--------+------+\n"
+                                       "|   |       |        |      |\n"
+                                       "| 3 | 4     |   55   | 67   |\n"
+                                       "|   |       |        |      |\n"
+                                       "+---+-------+--------+------+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -404,27 +385,25 @@ void test_cpp_table_cell_properties(void)
         fort::char_table::default_props().set_cell_min_width(5);
         fort::char_table::default_props().set_cell_text_align(fort::text_align::center);
 
-        fort::char_table table = create_cpp_test_int_table(false);
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+-----+-----+-----+-----+\n"
-            "|     |     |     |     |\n"
-            "|  3  |  4  | 55  | 67  |\n"
-            "|     |     |     |     |\n"
-            "+-----+-----+-----+-----+\n"
-            "|     |     |     |     |\n"
-            "|  3  |  4  | 55  | 67  |\n"
-            "|     |     |     |     |\n"
-            "+-----+-----+-----+-----+\n"
-            "|     |     |     |     |\n"
-            "|  3  |  4  | 55  | 67  |\n"
-            "|     |     |     |     |\n"
-            "+-----+-----+-----+-----+\n";
+        fort::char_table table            = create_cpp_test_int_table(false);
+        std::string      table_str        = table.to_string();
+        std::string      table_str_etalon = "+-----+-----+-----+-----+\n"
+                                            "|     |     |     |     |\n"
+                                            "|  3  |  4  | 55  | 67  |\n"
+                                            "|     |     |     |     |\n"
+                                            "+-----+-----+-----+-----+\n"
+                                            "|     |     |     |     |\n"
+                                            "|  3  |  4  | 55  | 67  |\n"
+                                            "|     |     |     |     |\n"
+                                            "+-----+-----+-----+-----+\n"
+                                            "|     |     |     |     |\n"
+                                            "|  3  |  4  | 55  | 67  |\n"
+                                            "|     |     |     |     |\n"
+                                            "+-----+-----+-----+-----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
     WHEN("Multiline cell") {
-
         set_test_properties_as_default();
         fort::char_table table;
         table[0].set_cell_row_type(fort::row_type::header);
@@ -433,22 +412,21 @@ void test_cpp_table_cell_properties(void)
         assert_true(table.write_ln("5", "c", "234\n12", "3.140000"));
         table << 3 << 'c' << "234" << 3.14 << fort::endr;
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---+---+-----+----------+\n"
-            "|   |   |     |          |\n"
-            "| 4 | c | 234 |     3.14 |\n"
-            "|   |   |     |          |\n"
-            "+---+---+-----+----------+\n"
-            "|   |   |     |          |\n"
-            "| 5 | c | 234 | 3.140000 |\n"
-            "|   |   | 12  |          |\n"
-            "|   |   |     |          |\n"
-            "+---+---+-----+----------+\n"
-            "|   |   |     |          |\n"
-            "| 3 | c | 234 |     3.14 |\n"
-            "|   |   |     |          |\n"
-            "+---+---+-----+----------+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---+---+-----+----------+\n"
+                                       "|   |   |     |          |\n"
+                                       "| 4 | c | 234 |     3.14 |\n"
+                                       "|   |   |     |          |\n"
+                                       "+---+---+-----+----------+\n"
+                                       "|   |   |     |          |\n"
+                                       "| 5 | c | 234 | 3.140000 |\n"
+                                       "|   |   | 12  |          |\n"
+                                       "|   |   |     |          |\n"
+                                       "+---+---+-----+----------+\n"
+                                       "|   |   |     |          |\n"
+                                       "| 3 | c | 234 |     3.14 |\n"
+                                       "|   |   |     |          |\n"
+                                       "+---+---+-----+----------+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -471,29 +449,28 @@ void test_cpp_table_cell_properties(void)
 
         table[4][3].set_cell_span(2);
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+---------------------------------------------+\n"
-            "|                                             |\n"
-            "|                                         111 |\n"
-            "|                                             |\n"
-            "+-------+------------------------------+------+\n"
-            "|       |                              |      |\n"
-            "|  2222 |                        33333 |  111 |\n"
-            "|       |                              |      |\n"
-            "+-------+--------+----------+----------+------+\n"
-            "|       |        |          |          |      |\n"
-            "| 33333 | 444444 | 55555555 |      111 | 2222 |\n"
-            "|       |        |          |          |      |\n"
-            "+-------+--------+----------+----------+------+\n"
-            "|       |        |          |          |      |\n"
-            "|  2222 |  33333 |   444444 | 55555555 |  111 |\n"
-            "|       |        |          |          |      |\n"
-            "+-------+--------+----------+----------+------+\n"
-            "|       |        |          |                 |\n"
-            "|  2222 |  33333 |   444444 |        55555555 |\n"
-            "|       |        |          |                 |\n"
-            "+-------+--------+----------+-----------------+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+---------------------------------------------+\n"
+                                       "|                                             |\n"
+                                       "|                                         111 |\n"
+                                       "|                                             |\n"
+                                       "+-------+------------------------------+------+\n"
+                                       "|       |                              |      |\n"
+                                       "|  2222 |                        33333 |  111 |\n"
+                                       "|       |                              |      |\n"
+                                       "+-------+--------+----------+----------+------+\n"
+                                       "|       |        |          |          |      |\n"
+                                       "| 33333 | 444444 | 55555555 |      111 | 2222 |\n"
+                                       "|       |        |          |          |      |\n"
+                                       "+-------+--------+----------+----------+------+\n"
+                                       "|       |        |          |          |      |\n"
+                                       "|  2222 |  33333 |   444444 | 55555555 |  111 |\n"
+                                       "|       |        |          |          |      |\n"
+                                       "+-------+--------+----------+----------+------+\n"
+                                       "|       |        |          |                 |\n"
+                                       "|  2222 |  33333 |   444444 |        55555555 |\n"
+                                       "|       |        |          |                 |\n"
+                                       "+-------+--------+----------+-----------------+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -518,35 +495,32 @@ void test_cpp_table_cell_properties(void)
         table[0].set_cell_row_type(fort::row_type::header);
 
         std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "╔════════════════╤════════════════════════════╗\n"
-            "║                │                            ║\n"
-            "║            111 │                      33333 ║\n"
-            "║                │                            ║\n"
-            "╠═══════╤════════╧═════════════════════╤══════╣\n"
-            "║       │                              │      ║\n"
-            "║  2222 │                        33333 │  111 ║\n"
-            "║       │                              │      ║\n"
-            "╟───────┼────────┬──────────┬──────────┼──────╢\n"
-            "║       │        │          │          │      ║\n"
-            "║ 33333 │ 444444 │ 55555555 │      111 │ 2222 ║\n"
-            "║       │        │          │          │      ║\n"
-            "╟───────┼────────┼──────────┼──────────┼──────╢\n"
-            "║       │        │          │          │      ║\n"
-            "║  2222 │  33333 │   444444 │ 55555555 │  111 ║\n"
-            "║       │        │          │          │      ║\n"
-            "╟───────┼────────┼──────────┼──────────┴──────╢\n"
-            "║       │        │          │                 ║\n"
-            "║  2222 │  33333 │   444444 │        55555555 ║\n"
-            "║       │        │          │                 ║\n"
-            "╚═══════╧════════╧══════════╧═════════════════╝\n";
+        std::string table_str_etalon = "╔════════════════╤════════════════════════════╗\n"
+                                       "║                │                            ║\n"
+                                       "║            111 │                      33333 ║\n"
+                                       "║                │                            ║\n"
+                                       "╠═══════╤════════╧═════════════════════╤══════╣\n"
+                                       "║       │                              │      ║\n"
+                                       "║  2222 │                        33333 │  111 ║\n"
+                                       "║       │                              │      ║\n"
+                                       "╟───────┼────────┬──────────┬──────────┼──────╢\n"
+                                       "║       │        │          │          │      ║\n"
+                                       "║ 33333 │ 444444 │ 55555555 │      111 │ 2222 ║\n"
+                                       "║       │        │          │          │      ║\n"
+                                       "╟───────┼────────┼──────────┼──────────┼──────╢\n"
+                                       "║       │        │          │          │      ║\n"
+                                       "║  2222 │  33333 │   444444 │ 55555555 │  111 ║\n"
+                                       "║       │        │          │          │      ║\n"
+                                       "╟───────┼────────┼──────────┼──────────┴──────╢\n"
+                                       "║       │        │          │                 ║\n"
+                                       "║  2222 │  33333 │   444444 │        55555555 ║\n"
+                                       "║       │        │          │                 ║\n"
+                                       "╚═══════╧════════╧══════════╧═════════════════╝\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 }
 
-
-void test_cpp_table_text_styles(void)
-{
+void test_cpp_table_text_styles(void) {
     set_test_properties_as_default();
 
     WHEN("Simple table with one cell and foreground content color") {
@@ -555,13 +529,12 @@ void test_cpp_table_text_styles(void)
         table[0][0].set_cell_content_fg_color(fort::color::yellow);
         table << 42;
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+----+\n"
-            "|\033[33m\033[0m    |\n"
-            "| \033[33m42\033[0m |\n"
-            "|\033[33m\033[0m    |\n"
-            "+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+----+\n"
+                                       "|\033[33m\033[0m    |\n"
+                                       "| \033[33m42\033[0m |\n"
+                                       "|\033[33m\033[0m    |\n"
+                                       "+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -571,13 +544,12 @@ void test_cpp_table_text_styles(void)
         table[0][0].set_cell_content_bg_color(fort::color::yellow);
         table << 42;
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+----+\n"
-            "|\033[43m\033[0m    |\n"
-            "| \033[43m42\033[0m |\n"
-            "|\033[43m\033[0m    |\n"
-            "+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+----+\n"
+                                       "|\033[43m\033[0m    |\n"
+                                       "| \033[43m42\033[0m |\n"
+                                       "|\033[43m\033[0m    |\n"
+                                       "+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -587,13 +559,12 @@ void test_cpp_table_text_styles(void)
         table[0][0].set_cell_bg_color(fort::color::yellow);
         table << 42;
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+----+\n"
-            "|\033[43m    \033[0m|\n"
-            "|\033[43m 42 \033[0m|\n"
-            "|\033[43m    \033[0m|\n"
-            "+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+----+\n"
+                                       "|\033[43m    \033[0m|\n"
+                                       "|\033[43m 42 \033[0m|\n"
+                                       "|\033[43m    \033[0m|\n"
+                                       "+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -603,13 +574,12 @@ void test_cpp_table_text_styles(void)
         table[0][0].set_cell_content_text_style(fort::text_style::underlined);
         table << 42;
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+----+\n"
-            "|\033[4m\033[0m    |\n"
-            "| \033[4m42\033[0m |\n"
-            "|\033[4m\033[0m    |\n"
-            "+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+----+\n"
+                                       "|\033[4m\033[0m    |\n"
+                                       "| \033[4m42\033[0m |\n"
+                                       "|\033[4m\033[0m    |\n"
+                                       "+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -620,13 +590,12 @@ void test_cpp_table_text_styles(void)
         table[0][0].set_cell_content_text_style(fort::text_style::bold);
         table << 42;
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+----+\n"
-            "|\033[1m\033[4m\033[0m    |\n"
-            "| \033[1m\033[4m42\033[0m |\n"
-            "|\033[1m\033[4m\033[0m    |\n"
-            "+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+----+\n"
+                                       "|\033[1m\033[4m\033[0m    |\n"
+                                       "| \033[1m\033[4m42\033[0m |\n"
+                                       "|\033[1m\033[4m\033[0m    |\n"
+                                       "+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -636,13 +605,12 @@ void test_cpp_table_text_styles(void)
         table[0][0].set_cell_text_style(fort::text_style::underlined);
         table << 42;
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+----+\n"
-            "|\033[4m    \033[0m|\n"
-            "|\033[4m 42 \033[0m|\n"
-            "|\033[4m    \033[0m|\n"
-            "+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+----+\n"
+                                       "|\033[4m    \033[0m|\n"
+                                       "|\033[4m 42 \033[0m|\n"
+                                       "|\033[4m    \033[0m|\n"
+                                       "+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -653,13 +621,12 @@ void test_cpp_table_text_styles(void)
         table[0][0].set_cell_text_style(fort::text_style::bold);
         table << 42;
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+----+\n"
-            "|\033[1m\033[4m    \033[0m|\n"
-            "|\033[1m\033[4m 42 \033[0m|\n"
-            "|\033[1m\033[4m    \033[0m|\n"
-            "+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+----+\n"
+                                       "|\033[1m\033[4m    \033[0m|\n"
+                                       "|\033[1m\033[4m 42 \033[0m|\n"
+                                       "|\033[1m\033[4m    \033[0m|\n"
+                                       "+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 
@@ -671,13 +638,12 @@ void test_cpp_table_text_styles(void)
         table[0][0].set_cell_content_text_style(fort::text_style::underlined);
         table << 42;
 
-        std::string table_str = table.to_string();
-        std::string table_str_etalon =
-            "+----+\n"
-            "|\033[41m\033[4m\033[33m\033[0m\033[41m    \033[0m|\n"
-            "|\033[41m \033[4m\033[33m42\033[0m\033[41m \033[0m|\n"
-            "|\033[41m\033[4m\033[33m\033[0m\033[41m    \033[0m|\n"
-            "+----+\n";
+        std::string table_str        = table.to_string();
+        std::string table_str_etalon = "+----+\n"
+                                       "|\033[41m\033[4m\033[33m\033[0m\033[41m    \033[0m|\n"
+                                       "|\033[41m \033[4m\033[33m42\033[0m\033[41m \033[0m|\n"
+                                       "|\033[41m\033[4m\033[33m\033[0m\033[41m    \033[0m|\n"
+                                       "+----+\n";
         assert_string_equal(table_str, table_str_etalon);
     }
 }

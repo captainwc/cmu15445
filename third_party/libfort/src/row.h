@@ -1,9 +1,10 @@
 #ifndef ROW_H
 #define ROW_H
 
-#include "fort_utils.h"
-#include "fort.h"
 #include <stdarg.h>
+
+#include "fort.h"
+#include "fort_utils.h"
 #include "properties.h"
 #ifdef FT_HAVE_WCHAR
 #include <wchar.h>
@@ -29,7 +30,7 @@ FT_INTERNAL
 f_row_t *create_row_from_string(const char *str);
 
 FT_INTERNAL
-f_row_t *create_row_from_fmt_string(const struct f_string_view  *fmt, va_list *va_args);
+f_row_t *create_row_from_fmt_string(const struct f_string_view *fmt, va_list *va_args);
 
 FT_INTERNAL
 size_t columns_in_row(const f_row_t *row);
@@ -62,10 +63,8 @@ FT_INTERNAL
 f_status row_set_cell_span(f_row_t *row, size_t cell_column, size_t hor_span);
 
 FT_INTERNAL
-int print_row_separator(f_conv_context_t *cntx,
-                        const size_t *col_width_arr, size_t cols,
-                        const f_row_t *upper_row, const f_row_t *lower_row,
-                        enum f_hor_separator_pos separatorPos, const f_separator_t *sep);
+int print_row_separator(f_conv_context_t *cntx, const size_t *col_width_arr, size_t cols, const f_row_t *upper_row,
+                        const f_row_t *lower_row, enum f_hor_separator_pos separatorPos, const f_separator_t *sep);
 
 FT_INTERNAL
 int snprintf_row(const f_row_t *row, f_conv_context_t *cntx, size_t *col_width_arr, size_t col_width_arr_sz,
@@ -75,6 +74,5 @@ int snprintf_row(const f_row_t *row, f_conv_context_t *cntx, size_t *col_width_a
 FT_INTERNAL
 f_row_t *create_row_from_wstring(const wchar_t *str);
 #endif
-
 
 #endif /* ROW_H */

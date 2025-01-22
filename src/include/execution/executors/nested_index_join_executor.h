@@ -31,24 +31,24 @@ namespace bustub {
  * IndexJoinExecutor executes index join operations.
  */
 class NestIndexJoinExecutor : public AbstractExecutor {
- public:
-  /**
-   * Creates a new nested index join executor.
-   * @param exec_ctx the context that the nested index join should be performed in
-   * @param plan the nested index join plan to be executed
-   * @param child_executor the outer table
-   */
-  NestIndexJoinExecutor(ExecutorContext *exec_ctx, const NestedIndexJoinPlanNode *plan,
-                        std::unique_ptr<AbstractExecutor> &&child_executor);
+public:
+    /**
+     * Creates a new nested index join executor.
+     * @param exec_ctx the context that the nested index join should be performed in
+     * @param plan the nested index join plan to be executed
+     * @param child_executor the outer table
+     */
+    NestIndexJoinExecutor(ExecutorContext *exec_ctx, const NestedIndexJoinPlanNode *plan,
+                          std::unique_ptr<AbstractExecutor> &&child_executor);
 
-  auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
+    auto GetOutputSchema() const -> const Schema & override { return plan_->OutputSchema(); }
 
-  void Init() override;
+    void Init() override;
 
-  auto Next(Tuple *tuple, RID *rid) -> bool override;
+    auto Next(Tuple *tuple, RID *rid) -> bool override;
 
- private:
-  /** The nested index join plan node. */
-  const NestedIndexJoinPlanNode *plan_;
+private:
+    /** The nested index join plan node. */
+    const NestedIndexJoinPlanNode *plan_;
 };
 }  // namespace bustub

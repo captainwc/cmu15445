@@ -18,8 +18,12 @@ TopNPerGroupExecutor::TopNPerGroupExecutor(ExecutorContext *exec_ctx, const TopN
                                            std::unique_ptr<AbstractExecutor> &&child_executor)
     : AbstractExecutor(exec_ctx), plan_(plan), child_executor_(std::move(child_executor)) {}
 
-void TopNPerGroupExecutor::Init() { throw NotImplementedException("TopNPerGroupExecutor is not implemented"); }
+void TopNPerGroupExecutor::Init() {
+    throw NotImplementedException("TopNPerGroupExecutor is not implemented");
+}
 
-auto TopNPerGroupExecutor::Next(Tuple *tuple, RID *rid) -> bool { return false; }
+auto TopNPerGroupExecutor::Next(Tuple *tuple, RID *rid) -> bool {
+    return false;
+}
 
 }  // namespace bustub
